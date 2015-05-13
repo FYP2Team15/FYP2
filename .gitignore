@@ -17,10 +17,12 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Inogre
-*.csproj
-*.unityproj
-*.meta
+# Ignore
+# remove hashtags for this 3 later on
+# *.csproj
+# *.unityproj
+# *.meta
+
 # =========================
 # Operating System Files
 # =========================
