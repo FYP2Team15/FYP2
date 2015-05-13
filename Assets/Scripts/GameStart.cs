@@ -37,7 +37,7 @@ public class GameStart : MonoSingleton<GameStart>
 	public void GameInit ()
 	{
 		GridCamera.RaycastOn ();
-		GridGenerator.instance.Clear ();
+		//GridGenerator.instance.Clear ();
 		GridGenerator.instance.Generate (tile, Vector3.zero, 10, 10);
 
 		List<GameObject> list = new List<GameObject> ();

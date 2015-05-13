@@ -18,10 +18,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # Ignore
-# remove hashtags for this 3 later on
-# *.csproj
-# *.unityproj
-# *.meta
+*.meta
 
 # =========================
 # Operating System Files
