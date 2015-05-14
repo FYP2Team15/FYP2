@@ -62,7 +62,7 @@ public class GridCamera : MonoSingleton<GridCamera>
             trigger = null;
             return;
         }
-
+		//Debug.Log ('X' + Input.mousePosition.x + ", Y" + Input.mousePosition.y);
         Ray ray = camera.ScreenPointToRay (Input.mousePosition);
 
         RaycastHit hit = new RaycastHit ();
@@ -84,7 +84,7 @@ public class GridCamera : MonoSingleton<GridCamera>
 
                 // Current trigger is now our last trigger.
                 trigger = newTrigger;
-                trigger.StartHover ();
+                //trigger.StartHover ();
             }
 
             // Collider did NOT have Trigger attached.

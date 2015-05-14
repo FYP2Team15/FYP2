@@ -4,16 +4,16 @@ using System.Collections;
 
 public class TileView : GridView {
 	
-	public Transform originTransform;
-	public Vector3 origin; // Used for instantiating at a specific grid.
+	//public Transform originTransform;
+	//public Vector3 origin; // Used for instantiating at a specific grid.
 	
-	public ViewState state;
-	protected Color color;
-	public Renderer[] renderers;
+	//public ViewState state;
+	//protected Color color;
+	//public Renderer[] renderers;
 	
 	void Awake ()
 	{
-		color = renderers [0].renderer.material.color;
+		//color = renderers [0].renderer.material.color;
 		origin = originTransform.position;
 	}
 	

@@ -249,24 +249,38 @@ public class GridGenerator : MonoSingleton<GridGenerator>
     }
     
     // Use this for initialization
-    public void Generate (GameObject obj, Vector3 origin, int width, int height)
+	public void Generate (string name,GameObject obj, Vector3 origin, int width, int height)
     {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 Vector3 position = origin + new Vector3 (x, 0, y);
                 GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-                GridModel model = go.GetComponent<GridModel>();
+				go.name = name + x + y;
+				GridModel model = go.GetComponent<GridModel>();
                 model.coord = new Coord(x,y);
                 tiles.Add (go);
             }
         }
     }
  	
-	public void GenerateT (GameObject obj, Vector3 origin, int width, int height)
+	public void GenerateT (string name,GameObject obj, Vector3 origin, int width, int height)
 	{
+		int objCount = 0;
+		Vector3 position1 = origin + new Vector3 (0, 0, 0);
+		GameObject go1 = Instantiate (obj, position1, Quaternion.identity) as GameObject;
+		go1.name = name + objCount;
+		objCount++;
+		//go1.tag = name;
+		GridModel model1 = go1.GetComponent<GridModel> ();
+		model1.coord = new Coord (0, 0);
+		tiles.Add (go1);
+
 		for (int x = 1; x < width; x++) {
 			Vector3 position = origin + new Vector3 (x, 0, 0);
 			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+			go.name = name + objCount;
+			objCount++;
+			//go.tag = name;
 			GridModel model = go.GetComponent<GridModel> ();
 			model.coord = new Coord (x, 0);
 			tiles.Add (go);
@@ -274,20 +288,29 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 		for (int x = 1; x < width; x++) {
 			Vector3 position = origin + new Vector3 (-x, 0, 0);
 			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+			go.name = name + objCount;
+			objCount++;
+			//go.tag = name;
 			GridModel model = go.GetComponent<GridModel> ();
 			model.coord = new Coord (-x, 0);
 			tiles.Add (go);
 		}
-		for (int y = 0; y < height; y++) {
+		for (int y = 1; y < height; y++) {
 			Vector3 position = origin + new Vector3 (0, 0, y);
 			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+			go.name = name + objCount;
+			objCount++;
+			//go.tag = name;
 			GridModel model = go.GetComponent<GridModel> ();
 			model.coord = new Coord (0, y);
 			tiles.Add (go);
 		}
-		for (int y = 0; y < height; y++) {
+		for (int y = 1; y < height; y++) {
 			Vector3 position = origin + new Vector3 (0, 0, -y);
 			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+			go.name = name + objCount;
+			objCount++;
+			//go.tag = name;
 			GridModel model = go.GetComponent<GridModel> ();
 			model.coord = new Coord (0, -y);
 			tiles.Add (go);
@@ -311,7 +334,27 @@ public class GridGenerator : MonoSingleton<GridGenerator>
             }
         }
     }
-
+	public void Delete (string name)
+	{
+		foreach (GameObject go in tiles ) {
+			if(go != null)
+			{
+				if(go.name == name)
+				Destroy (go);
+			}
+		}
+	}
+	public bool Check (string name)
+	{
+		foreach (GameObject go in tiles ) {
+			if(go != null)
+			{
+				if(go.name == name)
+					return true;
+			}
+		}
+		return false;
+	}
     /**
      * TODO
      * -- Generate by Pattern

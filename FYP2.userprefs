@@ -1,22 +1,21 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GridGenerator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CheckGrid.cs">
     <Files>
-      <File FileName="Assets\Scripts\MusicPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MonsterRaycast.cs" Line="13" Column="1" />
-      <File FileName="Assets\Scripts\GridDirector.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MonsterGrid.cs" Line="18" Column="29" />
-      <File FileName="Assets\Scripts\GameStart.cs" Line="9" Column="11" />
-      <File FileName="Assets\Scripts\GridGenerator.cs" Line="292" Column="33" />
-      <File FileName="Assets\Scripts\GridTrigger.cs" Line="23" Column="33" />
-      <File FileName="Assets\Scripts\TileController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TileModel.cs" Line="34" Column="36" />
-      <File FileName="Assets\Scripts\TileView.cs" Line="41" Column="56" />
+      <File FileName="Assets\Scripts\CheckGrid.cs" Line="14" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GameStart.cs" line="56" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GridTrigger.cs" line="36" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GridController.cs" line="29" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GridController.cs" line="33" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GridController.cs" line="37" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GridController.cs" line="41" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\TileController.cs" line="11" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\TileController.cs" line="19" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\MonsterGrid.cs" line="47" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\MonsterGrid.cs" line="45" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

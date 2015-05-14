@@ -9,7 +9,7 @@ public class TileModel : GridModel {
 	public GridController controller;
 
 	List<GameObject> withinRange = new List<GameObject> ();
-	
+
 	public void Selected ()
 	{
 		controller.view.SetState (ViewState.Selected);
@@ -23,6 +23,20 @@ public class TileModel : GridModel {
 	
 	public override void OnLeftClick ()
 	{
+		GameObject[] Monster = GameObject.FindGameObjectsWithTag ("Player");
+		foreach (GameObject go in Monster ) {
+			if(go != null)
+			{
+				MonsterGrid MonsterScript = go.GetComponent<MonsterGrid>();
+				if(MonsterScript.GridCheck (this.name))
+				{
+					MonsterScript.GridDelete ();
+					Debug.Log (this.name);
+					TranslateMonster TMonster = go.GetComponent<TranslateMonster>();
+					TMonster.Translate (true, this.transform.position);
+				}
+			}
+		}
 	}
 	
 	public void Possible ()

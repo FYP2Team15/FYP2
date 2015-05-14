@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Character.cs" />
+     <Compile Include="Assets\Scripts\CheckGrid.cs" />
      <Compile Include="Assets\Scripts\CreepAI.cs" />
      <Compile Include="Assets\Scripts\EnemyDetector.cs" />
      <Compile Include="Assets\Scripts\GUIControl.cs" />
@@ -64,12 +65,14 @@
      <Compile Include="Assets\Scripts\Hero.cs" />
      <Compile Include="Assets\Scripts\MonoSingleton.cs" />
      <Compile Include="Assets\Scripts\MonsterGrid.cs" />
-     <Compile Include="Assets\Scripts\MonsterRaycast.cs" />
+     <Compile Include="Assets\Scripts\MonsterTouch.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\TileController.cs" />
      <Compile Include="Assets\Scripts\TileModel.cs" />
+     <Compile Include="Assets\Scripts\TileTouch.cs" />
      <Compile Include="Assets\Scripts\TileView.cs" />
      <Compile Include="Assets\Scripts\TouchCamera.cs" />
+     <Compile Include="Assets\Scripts\TranslateMonster.cs" />
      <Compile Include="Assets\Scripts\Waypoint.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />

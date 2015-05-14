@@ -23,7 +23,7 @@ public class GameStart : MonoSingleton<GameStart>
 	public GameState state = GameState.None;
 	public Player player = Player.Player1;
 	public int turn = 0;
-	
+	public string tileName = "Tile";
 	//TttModel[] board = new Player[9];
 	List<TileModel> board = new List<TileModel>();
 	
@@ -38,7 +38,7 @@ public class GameStart : MonoSingleton<GameStart>
 	{
 		GridCamera.RaycastOn ();
 		//GridGenerator.instance.Clear ();
-		GridGenerator.instance.Generate (tile, Vector3.zero, 10, 10);
+		GridGenerator.instance.Generate (tileName,tile, Vector3.zero, 10, 10);
 
 		List<GameObject> list = new List<GameObject> ();
 	}
