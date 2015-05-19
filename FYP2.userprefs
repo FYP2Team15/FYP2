@@ -1,21 +1,20 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CheckGrid.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EnemyMovement.cs">
     <Files>
-      <File FileName="Assets\Scripts\CheckGrid.cs" Line="14" Column="29" />
+      <File FileName="Assets\Scripts\TranslateMonster.cs" Line="43" Column="5" />
+      <File FileName="Assets\Scripts\CameraControl.cs" Line="4" Column="45" />
+      <File FileName="Assets\Scripts\EnemyMovement.cs" Line="59" Column="1" />
+      <File FileName="Assets\Scripts\GameStart.cs" Line="109" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GridTrigger.cs" line="36" />
-      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GridController.cs" line="29" />
-      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GridController.cs" line="33" />
-      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GridController.cs" line="37" />
-      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\GridController.cs" line="41" />
-      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\TileController.cs" line="11" />
-      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\TileController.cs" line="19" />
-      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\MonsterGrid.cs" line="47" />
-      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\MonsterGrid.cs" line="45" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\Stats.cs" line="21" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\CheckGrid.cs" line="47" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\Stats.cs" line="32" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\Stats.cs" line="34" />
+      <Breakpoint file="C:\Users\-\Documents\FYP2\Assets\Scripts\CheckGrid.cs" line="68" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

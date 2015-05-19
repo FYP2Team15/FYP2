@@ -30,6 +30,12 @@ public class TileModel : GridModel {
 				MonsterGrid MonsterScript = go.GetComponent<MonsterGrid>();
 				if(MonsterScript.GridCheck (this.name))
 				{
+					//Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 0.5f);
+					//for (int i = 0; i < hitColliders.Length; i++) {
+					//	if(hitColliders[i].name != "Terrain" || hitColliders[i].name != "Trigger")
+					//	Debug.Log(hitColliders[i].name);
+					//}
+					MonsterScript.GridActive = false;
 					MonsterScript.GridDelete ();
 					Debug.Log (this.name);
 					TranslateMonster TMonster = go.GetComponent<TranslateMonster>();

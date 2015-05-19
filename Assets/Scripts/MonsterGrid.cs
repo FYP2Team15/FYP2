@@ -13,39 +13,40 @@ public class MonsterGrid : MonoBehaviour
 	//}
 	void OnMouseDown ()
 	{
-		Debug.Log (this.name);
-		if(!GridActive)
-			GridInit();
-		if(GridActive)
-			GridDelete();
-		GridActive = !GridActive;
+		if (GameStart.Player1()) {
+						GameObject PTExist = GameObject.FindGameObjectWithTag ("PlayerTile");
+						if (PTExist == null || GridCheck (PTExist.name)) {
+								if (!GridActive)
+										GridInit ();
+								if (GridActive)
+										GridDelete ();
+						}
+						GridActive = !GridActive;
+				}
 	}
 	public void GridInit ()
 	{
 		GridCamera.RaycastOn ();
 		//GridGenerator.instance.Clear ();
 		GridGenerator.instance.GenerateT (this.name,tile, this.transform.position, range, range);
+
 	}
 	public void GridDelete ()
 	{
-		for (int x = 0; x < (range*2-1); x++) {
-			for (int y = 0; y < (range*2-1); y++)
-			{
-				string tile = this.name + (x+y);
+		for (int x = 0; x < (range*4-3); x++)
+		{
+				string tile = this.name + "_T"  + (x);
 				GridGenerator.instance.Delete (tile);
-			}
 		}
 		GridGenerator.instance.tiles.RemoveAll(item => item == null);
 	}
 	public bool GridCheck (string name)
 	{
-		for (int x = 0; x < (range*2-1); x++) {
-			for (int y = 0; y < (range*2-1); y++)
-			{
-				string tile = this.name + (x+y);
-				if(name == tile)
-					return true;
-			}
+		for (int x = 0; x < (range*4-3); x++)
+		{
+			string tile = this.name + "_T" + (x);
+			if(name == tile)
+				return true;
 		}
 		return false;
 	}

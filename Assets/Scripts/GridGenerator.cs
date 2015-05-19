@@ -255,7 +255,7 @@ public class GridGenerator : MonoSingleton<GridGenerator>
             for (int y = 0; y < height; y++) {
                 Vector3 position = origin + new Vector3 (x, 0, y);
                 GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-				go.name = name + x + y;
+				go.name = name + "_T" + x + y;
 				GridModel model = go.GetComponent<GridModel>();
                 model.coord = new Coord(x,y);
                 tiles.Add (go);
@@ -268,7 +268,7 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 		int objCount = 0;
 		Vector3 position1 = origin + new Vector3 (0, 0, 0);
 		GameObject go1 = Instantiate (obj, position1, Quaternion.identity) as GameObject;
-		go1.name = name + objCount;
+		go1.name = name + "_T" + objCount;
 		objCount++;
 		//go1.tag = name;
 		GridModel model1 = go1.GetComponent<GridModel> ();
@@ -278,7 +278,7 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 		for (int x = 1; x < width; x++) {
 			Vector3 position = origin + new Vector3 (x, 0, 0);
 			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-			go.name = name + objCount;
+			go.name = name + "_T" + objCount;
 			objCount++;
 			//go.tag = name;
 			GridModel model = go.GetComponent<GridModel> ();
@@ -288,7 +288,7 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 		for (int x = 1; x < width; x++) {
 			Vector3 position = origin + new Vector3 (-x, 0, 0);
 			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-			go.name = name + objCount;
+			go.name = name + "_T" + objCount;
 			objCount++;
 			//go.tag = name;
 			GridModel model = go.GetComponent<GridModel> ();
@@ -298,7 +298,7 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 		for (int y = 1; y < height; y++) {
 			Vector3 position = origin + new Vector3 (0, 0, y);
 			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-			go.name = name + objCount;
+			go.name = name + "_T" + objCount;
 			objCount++;
 			//go.tag = name;
 			GridModel model = go.GetComponent<GridModel> ();
@@ -308,7 +308,7 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 		for (int y = 1; y < height; y++) {
 			Vector3 position = origin + new Vector3 (0, 0, -y);
 			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-			go.name = name + objCount;
+			go.name = name + "_T" + objCount;
 			objCount++;
 			//go.tag = name;
 			GridModel model = go.GetComponent<GridModel> ();

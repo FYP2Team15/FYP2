@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\CheckGrid.cs" />
      <Compile Include="Assets\Scripts\CreepAI.cs" />
      <Compile Include="Assets\Scripts\EnemyDetector.cs" />
+     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
      <Compile Include="Assets\Scripts\GUIControl.cs" />
      <Compile Include="Assets\Scripts\GameInit.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\Scripts\MonsterGrid.cs" />
      <Compile Include="Assets\Scripts\MonsterTouch.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
+     <Compile Include="Assets\Scripts\Stats.cs" />
      <Compile Include="Assets\Scripts\TileController.cs" />
      <Compile Include="Assets\Scripts\TileModel.cs" />
      <Compile Include="Assets\Scripts\TileTouch.cs" />
