@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class MonsterGrid : MonoBehaviour
 {
-	public GameObject tile;
+	public GameObject tile;//normal tile
+	public GameObject tile2;//collided tile
 	public int range = 5;
 	public bool GridActive = false;
 	//protected override void Init()
@@ -13,22 +14,30 @@ public class MonsterGrid : MonoBehaviour
 	//}
 	void OnMouseDown ()
 	{
-		if (GameStart.Player1()) {
+		if (GameStart.Player1() && this.tag == "Player") {
 						GameObject PTExist = GameObject.FindGameObjectWithTag ("PlayerTile");
-						if (PTExist == null || GridCheck (PTExist.name)) {
-								if (!GridActive)
+ 						if (PTExist == null || GridCheck (PTExist.name)) {
+								if (!GridActive && !GameStart.disableGrid)
+								{
+										if(this.GetComponent<Preview>().GridActive)
+											this.GetComponent<Preview>().GridDelete();
 										GridInit ();
+										GameStart.disableGrid = true;
+								}
 								if (GridActive)
+								{
 										GridDelete ();
+										GameStart.disableGrid = false;
+								}
+								GridActive = !GridActive;
 						}
-						GridActive = !GridActive;
 				}
 	}
 	public void GridInit ()
 	{
 		GridCamera.RaycastOn ();
 		//GridGenerator.instance.Clear ();
-		GridGenerator.instance.GenerateT (this.name,tile, this.transform.position, range, range);
+		GridGenerator.instance.GenerateT (this.name,tile,tile2, this.transform.position, range, range);
 
 	}
 	public void GridDelete ()

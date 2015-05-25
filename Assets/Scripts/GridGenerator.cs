@@ -249,7 +249,7 @@ public class GridGenerator : MonoSingleton<GridGenerator>
     }
     
     // Use this for initialization
-	public void Generate (string name,GameObject obj, Vector3 origin, int width, int height)
+	public void Generate (string name,GameObject obj, Vector3 origin, int width, int height)//box
     {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -262,8 +262,45 @@ public class GridGenerator : MonoSingleton<GridGenerator>
             }
         }
     }
- 	
-	public void GenerateT (string name,GameObject obj, Vector3 origin, int width, int height)
+
+	public void GenerateV (string name,GameObject obj, Vector3 origin, int vertical,int objCount = 0)//vertical
+	{
+		for (int y = 1; y < vertical; y++) {
+			Vector3 position = origin + new Vector3 (0, 0, y);
+			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+			go.name = name + "_VT" + objCount;
+			objCount++;
+			//go.tag = name;
+			GridModel model = go.GetComponent<GridModel> ();
+			model.coord = new Coord (y, 0);
+			tiles.Add (go);
+		}
+	}
+
+	public void GenerateH (string name,GameObject obj, Vector3 origin, int horizontal, int objCount = 0)//horizontal
+	{
+		for (int x = 1; x < horizontal; x++) {
+			Vector3 position = origin + new Vector3 (x, 0, 0);
+			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+			go.name = name + "_HT" + objCount;
+			objCount++;
+			//go.tag = name;
+			GridModel model = go.GetComponent<GridModel> ();
+			model.coord = new Coord (x, 0);
+			tiles.Add (go);
+		}
+	}
+	public void GenerateB (string name,GameObject obj, Vector3 origin, int width, int height)
+	{
+		int objectCount = 0;
+		GenerateH (name,obj,origin,width, objectCount);//draw 1st horizontal
+		GenerateV (name,obj,origin,height, objectCount);//draw 1st vertical
+		Vector3 Vertical2 = new Vector3 (width-1, 0, 0);//translation for 2nd vertical
+		GenerateV (name,obj,origin+Vertical2,height, objectCount);//draw 2nd vertical
+		Vector3 Horizontal2 = new Vector3 (0, 0, height - 1);//translation for 2nd horizontal
+		GenerateH (name,obj,origin+Horizontal2,width, objectCount);//draw 2nd horizontal
+	}
+	public void GenerateT (string name,GameObject obj,GameObject obj2, Vector3 origin, int width, int height)//t shape
 	{
 		int objCount = 0;
 		Vector3 position1 = origin + new Vector3 (0, 0, 0);
@@ -274,46 +311,141 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 		GridModel model1 = go1.GetComponent<GridModel> ();
 		model1.coord = new Coord (0, 0);
 		tiles.Add (go1);
-
+		bool obsHit1 = false;//init obstacle hit 1
 		for (int x = 1; x < width; x++) {
 			Vector3 position = origin + new Vector3 (x, 0, 0);
-			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-			go.name = name + "_T" + objCount;
-			objCount++;
-			//go.tag = name;
-			GridModel model = go.GetComponent<GridModel> ();
-			model.coord = new Coord (x, 0);
-			tiles.Add (go);
+			Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
+
+			for(int i = 0; i < hitColliders.Length; i++)
+			{
+				if(hitColliders[i].transform.tag == "Obstacle")//check for obstacle
+				{
+					obsHit1 = true;
+					break;//return true and end loop
+				}
+			}
+			if(obsHit1)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (x, 0);
+				tiles.Add (go);
+			}
+			else
+			{
+				GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (x, 0);
+				tiles.Add (go);
+			}
 		}
+		bool obsHit2 = false;//init obstacle hit 2
 		for (int x = 1; x < width; x++) {
 			Vector3 position = origin + new Vector3 (-x, 0, 0);
-			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-			go.name = name + "_T" + objCount;
-			objCount++;
-			//go.tag = name;
-			GridModel model = go.GetComponent<GridModel> ();
-			model.coord = new Coord (-x, 0);
-			tiles.Add (go);
+			Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
+
+			for(int i = 0; i < hitColliders.Length; i++)
+			{
+				if(hitColliders[i].transform.tag == "Obstacle")//check for obstacle
+				{
+					obsHit2 = true;
+					break;//return true and end loop
+				}
+			}
+			if(obsHit2)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (-x, 0);
+				tiles.Add (go);
+			}
+			else
+			{
+				GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (-x, 0);
+				tiles.Add (go);
+			}
 		}
+		bool obsHit3 = false;//init obstacle hit 3
 		for (int y = 1; y < height; y++) {
 			Vector3 position = origin + new Vector3 (0, 0, y);
-			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-			go.name = name + "_T" + objCount;
-			objCount++;
-			//go.tag = name;
-			GridModel model = go.GetComponent<GridModel> ();
-			model.coord = new Coord (0, y);
-			tiles.Add (go);
+			Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
+
+			for(int i = 0; i < hitColliders.Length; i++)
+			{
+				if(hitColliders[i].transform.tag == "Obstacle")//check for obstacle
+				{
+					obsHit3 = true;
+					break;//return true and end loop
+				}
+			}
+			if(obsHit3)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, y);
+				tiles.Add (go);
+			}
+			else
+			{
+				GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, y);
+				tiles.Add (go);
+			}
 		}
+		bool obsHit4 = false;//init obstacle hit 4
 		for (int y = 1; y < height; y++) {
 			Vector3 position = origin + new Vector3 (0, 0, -y);
-			GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-			go.name = name + "_T" + objCount;
-			objCount++;
-			//go.tag = name;
-			GridModel model = go.GetComponent<GridModel> ();
-			model.coord = new Coord (0, -y);
-			tiles.Add (go);
+			Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
+
+			for(int i = 0; i < hitColliders.Length; i++)
+			{
+				if(hitColliders[i].transform.tag == "Obstacle")//check for obstacle
+				{
+					obsHit4 = true;
+					break;//return true and end loop
+				}
+			}
+			if(obsHit4)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, -y);
+				tiles.Add (go);
+			}
+			else
+			{
+				GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, -y);
+				tiles.Add (go);
+			}
 		}
 	}
 

@@ -28,7 +28,7 @@ public class TileModel : GridModel {
 			if(go != null)
 			{
 				MonsterGrid MonsterScript = go.GetComponent<MonsterGrid>();
-				if(MonsterScript.GridCheck (this.name))
+				if(MonsterScript.GridCheck (this.name) && this.tag == "PlayerTile")
 				{
 					//Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 0.5f);
 					//for (int i = 0; i < hitColliders.Length; i++) {
@@ -39,6 +39,7 @@ public class TileModel : GridModel {
 					MonsterScript.GridDelete ();
 					Debug.Log (this.name);
 					TranslateMonster TMonster = go.GetComponent<TranslateMonster>();
+					GameStart.disableGrid = true;
 					TMonster.Translate (true, this.transform.position);
 				}
 			}
