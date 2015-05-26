@@ -39,6 +39,7 @@ public class TranslateMonster : MonoBehaviour {
 		if (this.transform.position == NextPos && TMonster) {
 			TMonster = false;
 			ccamera.target = null;
+			GameStart.disableGrid = false;
 			//if(this.tag == "Player")
 				GameStart.movesleft--;
 		}

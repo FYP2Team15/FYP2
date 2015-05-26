@@ -7,6 +7,7 @@ public enum GameState
 	None,
 	Playing,
 	Complete,
+	Lost,
 	Draw
 }
 
@@ -23,12 +24,19 @@ public class GameStart : MonoSingleton<GameStart>
 	public GameState state = GameState.None;
 	public static Player player = Player.Player1;
 	public static int movesleft = 2;
-	public static int turn = 0;
+	public static int turn = 1;
 	public string tileName = "Tile";
+	private static bool cameraPan = false;
+	static GameObject playerObj = null;
+	static GameObject camera;
+	static CameraControl ccamera;
+	private bool GameEndScreen = false;
+	private string GameEndMessage = "Sample text";
 	//TttModel[] board = new Player[9];
 	List<TileModel> board = new List<TileModel>();
 	
 	public GameObject tile;
+	public static bool disableGrid = false;
 
 	protected override void Init ()
 	{
@@ -39,9 +47,11 @@ public class GameStart : MonoSingleton<GameStart>
 	{
 		GridCamera.RaycastOn ();
 		//GridGenerator.instance.Clear ();
-		GridGenerator.instance.Generate (tileName,tile, Vector3.zero, 10, 10);
-
+		//GridGenerator.instance.Generate (tileName,tile, Vector3.zero, 10, 10);
+		state = GameState.Playing;
 		List<GameObject> list = new List<GameObject> ();
+		camera = GameObject.Find ("Camera");
+		ccamera = camera.GetComponent <CameraControl> ();
 	}
 	//public void Start()
 	//{
@@ -65,9 +75,46 @@ public class GameStart : MonoSingleton<GameStart>
 	//	
 	//}
 	void Update () {
-		if (movesleft == 0)
-			NextTurn ();
+				if (state != GameState.Playing && state != GameState.None)
+					GameEnd();
+				if (movesleft == 0 && state == GameState.Playing) {
+					Step();		
+				}
+				if (cameraPan) {
+						if (ccamera.transform.position == playerObj.transform.position+ccamera.offset) {
+								ccamera.target = null;
+								cameraPan = false;
+						}
+				}
 		}
+	private void GameEnd()
+	{
+		switch(state)
+		{
+		case GameState.Complete:
+			GameEndScreen = true;
+			GameEndMessage = "Victory";
+			state = GameState.None;
+			break;
+		case GameState.Lost:
+			GameEndScreen = true;
+			GameEndMessage = "Defeat";
+			state = GameState.None;
+			break;
+		case GameState.Draw:
+			GameEndScreen = true;
+			GameEndMessage = "Draw";
+			state = GameState.None;
+			break;
+		case GameState.Playing:
+		default:
+			GameEndScreen = true;
+			GameEndMessage = "Error";
+			break;
+		}
+		//Application.LoadLevel(Application.loadedLevel);
+
+	}
 	public void Step()
 	{
 		if(CheckWin ())
@@ -76,22 +123,46 @@ public class GameStart : MonoSingleton<GameStart>
 			state = GameState.Complete;
 			return;
 		}
-		
+
+		if(CheckLose ())
+		{
+			GridCamera.RaycastOff();
+			state = GameState.Lost;
+			return;
+		}
+
 		if(CheckDraw ())
 		{
 			GridCamera.RaycastOff();
 			state = GameState.Draw;
 			return;
 		}
-		
+		if ( state == GameState.Playing)
 		NextTurn ();
 	}
 	
 	private bool CheckWin()
 	{
+		GameObject VTile = GameObject.Find ("VictoryTile");//Get victory tile
+		Collider[] hitColliders = Physics.OverlapSphere (VTile.transform.position, 1.0f);//get gameobjects right beside this object
+		for (int i = 0; i < hitColliders.Length; i++) {
+			if (hitColliders [i].name == "Child")//if child is on victory tile win 
+				return true;
+		}
 		return false;
 	}
-	
+
+	private bool CheckLose()
+	{
+		GameObject Child = GameObject.Find ("Child");//find child
+		if (Child == null)
+			return true;
+		GameObject PlayerMonsteer = GameObject.FindGameObjectWithTag("Player");
+		if (PlayerMonsteer == null)
+			return true;
+		return false;
+	}
+
 	private bool CheckDraw()
 	{
 		return false;
@@ -103,10 +174,9 @@ public class GameStart : MonoSingleton<GameStart>
 		turn += 1;
 		player = (player == Player.Player1) ? Player.Player2 : Player.Player1;
 		if (Player1 ()) {
-			GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-			GameObject camera = GameObject.Find ("Camera");
-			CameraControl ccamera = camera.GetComponent <CameraControl> ();
+			playerObj = GameObject.FindGameObjectWithTag("Player");
 			ccamera.target = playerObj.transform;
+			cameraPan = true;
 		}
 	}
 
@@ -122,8 +192,13 @@ public class GameStart : MonoSingleton<GameStart>
 
 	void OnGUI()
 	{
-		GUI.Label (new Rect (0, 0, 100, 100), turn.ToString());
-		GUI.Label (new Rect (0, 10, 100, 100), movesleft.ToString());
-		GUI.Label (new Rect (0, 20, 100, 100), player.ToString());
+		if(GameEndScreen)
+			GUI.Label (new Rect (0, 0, 100, 100), GameEndMessage);
+		else
+		{
+			GUI.Label (new Rect (0, 0, 100, 100), turn.ToString());
+			GUI.Label (new Rect (0, 10, 100, 100), movesleft.ToString());
+			GUI.Label (new Rect (0, 20, 100, 100), player.ToString());
+		}
 	}
 }
