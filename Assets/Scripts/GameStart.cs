@@ -20,16 +20,16 @@ public enum Player
 
 public class GameStart : MonoSingleton<GameStart>
 {
-
+	private int finalScene = 2;
 	public GameState state = GameState.None;
 	public static Player player = Player.Player1;
 	public static int movesleft = 2;
 	public static int turn = 1;
 	public string tileName = "Tile";
 	private static bool cameraPan = false;
-	static GameObject playerObj = null;
+	static GameObject TargetObj = null;
 	static GameObject camera;
-	static CameraControl ccamera;
+	private static CameraControl ccamera;
 	private bool GameEndScreen = false;
 	private string GameEndMessage = "Sample text";
 	//TttModel[] board = new Player[9];
@@ -37,6 +37,10 @@ public class GameStart : MonoSingleton<GameStart>
 	
 	public GameObject tile;
 	public static bool disableGrid = false;
+
+	void Start () {
+		turn = 1;
+	}
 
 	protected override void Init ()
 	{
@@ -52,6 +56,8 @@ public class GameStart : MonoSingleton<GameStart>
 		List<GameObject> list = new List<GameObject> ();
 		camera = GameObject.Find ("Camera");
 		ccamera = camera.GetComponent <CameraControl> ();
+		GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
+		movesleft = playerObj.Length;
 	}
 	//public void Start()
 	//{
@@ -75,18 +81,32 @@ public class GameStart : MonoSingleton<GameStart>
 	//	
 	//}
 	void Update () {
-				if (state != GameState.Playing && state != GameState.None)
+				if (state != GameState.Playing && !GameEndScreen)
 					GameEnd();
+				if (Input.GetMouseButtonDown (0) && state == GameState.Complete) {
+					if(Application.loadedLevel != finalScene)
+						Application.LoadLevel (Application.loadedLevel + 1);
+					else
+						Application.LoadLevel (0);
+				}
+				if (Input.GetMouseButtonDown (0) && state == GameState.Lost) {
+						Application.LoadLevel (0);
+				}
 				if (movesleft == 0 && state == GameState.Playing) {
 					Step();		
 				}
 				if (cameraPan) {
-						if (ccamera.transform.position == playerObj.transform.position+ccamera.offset) {
-								ccamera.target = null;
-								cameraPan = false;
-						}
+					if (ccamera.transform.position == TargetObj.transform.position+ccamera.offset) {
+						ccamera.target = null;
+						cameraPan = false;
+					}
 				}
 		}
+	public static void StopCameraPan()
+	{
+		ccamera.target = null;
+		cameraPan = false;
+	}
 	private void GameEnd()
 	{
 		switch(state)
@@ -94,17 +114,17 @@ public class GameStart : MonoSingleton<GameStart>
 		case GameState.Complete:
 			GameEndScreen = true;
 			GameEndMessage = "Victory";
-			state = GameState.None;
+			//state = GameState.None;
 			break;
 		case GameState.Lost:
 			GameEndScreen = true;
 			GameEndMessage = "Defeat";
-			state = GameState.None;
+			//state = GameState.None;
 			break;
 		case GameState.Draw:
 			GameEndScreen = true;
 			GameEndMessage = "Draw";
-			state = GameState.None;
+			//state = GameState.None;
 			break;
 		case GameState.Playing:
 		default:
@@ -170,13 +190,27 @@ public class GameStart : MonoSingleton<GameStart>
 	
 	public static void NextTurn()
 	{
-		movesleft = 2;
+
 		turn += 1;
 		player = (player == Player.Player1) ? Player.Player2 : Player.Player1;
 		if (Player1 ()) {
-			playerObj = GameObject.FindGameObjectWithTag("Player");
-			ccamera.target = playerObj.transform;
+			GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
+			foreach(GameObject obj in playerObj)
+			{
+				obj.GetComponent<MonsterGrid>().turnOver = false;
+			}
+			movesleft = playerObj.Length;
+			ccamera.target = playerObj[0].transform;
+			TargetObj = playerObj[0];
 			cameraPan = true;
+		}
+		else {
+			GameObject[] enemyObj = GameObject.FindGameObjectsWithTag("EnemyMonster");
+			foreach(GameObject obj in enemyObj)
+			{
+				obj.GetComponent<MonsterGrid>().turnOver = false;
+			}
+			movesleft = enemyObj.Length;
 		}
 	}
 
@@ -193,7 +227,10 @@ public class GameStart : MonoSingleton<GameStart>
 	void OnGUI()
 	{
 		if(GameEndScreen)
+		{
 			GUI.Label (new Rect (0, 0, 100, 100), GameEndMessage);
+			GUI.Label (new Rect (0, 10, 100, 100), "Click Anything to continue");
+		}
 		else
 		{
 			GUI.Label (new Rect (0, 0, 100, 100), turn.ToString());

@@ -18,14 +18,14 @@ public class MusicPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!gameObject.audio.isPlaying && (Time.time - lastPlayingTime) > intervalTime) {
+		if (!gameObject.GetComponent<AudioSource>().isPlaying && (Time.time - lastPlayingTime) > intervalTime) {
 			int nextIndex = -1;
 			do {
 				nextIndex = GetNextIndex();
 			} while(nextIndex == lastIndex);
 			lastIndex = nextIndex;
-			gameObject.audio.clip = musics[nextIndex];
-			gameObject.audio.Play();
+			gameObject.GetComponent<AudioSource>().clip = musics[nextIndex];
+			gameObject.GetComponent<AudioSource>().Play();
 		}
 	}
 	

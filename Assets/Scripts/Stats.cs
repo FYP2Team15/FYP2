@@ -59,9 +59,16 @@ public class Stats : MonoBehaviour {
 			if (strength == type)
 				DmgDealt = DmgDealt / 2;
 		}
+		//GameStart.StopCameraPan ();
 		if (t.Armor < DmgDealt)
+		{
+			this.gameObject.GetComponent<TranslateMonster> ().nextTurn();
 			Destroy (target);
+		}
 		else
+		{
+			this.gameObject.GetComponent<TranslateMonster> ().nextTurn();
 			Destroy (this.gameObject);
+		}
 	}
 }

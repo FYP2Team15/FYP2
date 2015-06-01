@@ -63,7 +63,7 @@ public class GridCamera : MonoSingleton<GridCamera>
             return;
         }
 		//Debug.Log ('X' + Input.mousePosition.x + ", Y" + Input.mousePosition.y);
-        Ray ray = camera.ScreenPointToRay (Input.mousePosition);
+        Ray ray = GetComponent<Camera>().ScreenPointToRay (Input.mousePosition);
 
         RaycastHit hit = new RaycastHit ();
 

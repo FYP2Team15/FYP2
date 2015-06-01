@@ -1,20 +1,22 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GameUIText.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameStart.cs">
     <Files>
-      <File FileName="Assets\GameUIText.cs" Line="17" Column="2" />
+      <File FileName="Assets\Scripts\CheckGrid.cs" Line="123" Column="8" />
+      <File FileName="Assets\Scripts\TranslateMonster.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EnemyMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MonsterGrid.cs" Line="55" Column="7" />
+      <File FileName="Assets\Scripts\TileModel.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Stats.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GridController.cs" Line="28" Column="27" />
-      <File FileName="Assets\Scripts\GameStart.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GridModel.cs" Line="1" Column="1" />
-      <File FileName="Assets\UIBarInput.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GridCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GridView.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GridTrigger.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CameraControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameStart.cs" Line="36" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\-\Desktop\FYP2\FYP2\Assets\Scripts\GameStart.cs" line="205" />
+      <Breakpoint file="C:\Users\-\Desktop\FYP2\FYP2\Assets\Scripts\GameStart.cs" line="203" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

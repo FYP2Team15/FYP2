@@ -37,8 +37,21 @@ public class TileModel : GridModel {
 					//}
 					MonsterScript.GridActive = false;
 					MonsterScript.GridDelete ();
-					Debug.Log (this.name);
+					//Debug.Log (this.name);
 					TranslateMonster TMonster = go.GetComponent<TranslateMonster>();
+					GameStart.disableGrid = true;
+					TMonster.Translate (true, this.transform.position);
+				}
+				if(MonsterScript.GridCheck (this.name) && this.tag == "SpecialTile")
+				{
+					//Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 0.5f);
+					//for (int i = 0; i < hitColliders.Length; i++) {
+					//	if(hitColliders[i].name != "Terrain" || hitColliders[i].name != "Trigger")
+					//	Debug.Log(hitColliders[i].name);
+					//}
+					MonsterScript.GridActive = false;
+					MonsterScript.GridDelete ();
+					TranslateMonster TMonster = MonsterScript.specialTarget.GetComponent<TranslateMonster>();
 					GameStart.disableGrid = true;
 					TMonster.Translate (true, this.transform.position);
 				}

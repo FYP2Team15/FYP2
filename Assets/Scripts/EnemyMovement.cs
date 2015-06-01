@@ -11,11 +11,12 @@ public class EnemyMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		GameObject[] enemyUnits = GameObject.FindGameObjectsWithTag ("EnemyMonster");
 		if (!GameStart.Player1 () && GameStart.movesleft > 0) {
-						
-						GameObject[] enemyUnits = GameObject.FindGameObjectsWithTag ("EnemyMonster");
+						if(enemyUnits.Length < 1)
+							GameStart.movesleft--;
 						foreach (GameObject enemy in enemyUnits) {
-							if (enemy != null && !enemy.GetComponent<TranslateMonster> ().TMonster && GameStart.movesleft == currMove) {
+				if (enemy != null && !enemy.GetComponent<TranslateMonster> ().TMonster && GameStart.movesleft == currMove && !enemy.GetComponent<MonsterGrid> ().turnOver) {
 										if (delay >= 50) {
 												delay = 0;
 												currMove--;
@@ -30,10 +31,8 @@ public class EnemyMovement : MonoBehaviour {
 																		enemy.GetComponent<MonsterGrid> ().GridActive = true;
 																}
 																GameObject[] enemyTile = GameObject.FindGameObjectsWithTag ("EnemyTile");
-																GameObject closestObject = null;
+																GameObject closestObject = enemy;
 																foreach (GameObject tile in enemyTile) {
-																		if (closestObject == null)
-																				closestObject = enemy;
 																		Collider[] tiles = Physics.OverlapSphere (tile.transform.position, 0);
 																		int j = 0;
 																		bool obstacle = false;
@@ -78,6 +77,7 @@ public class EnemyMovement : MonoBehaviour {
 													}
 													GameObject[] enemyTile = GameObject.FindGameObjectsWithTag ("EnemyTile");
 													int rand = Random.Range(0, enemyTile.Length);
+													GameStart.disableGrid = true;
 													enemy.GetComponent<TranslateMonster> ().Translate (true, enemyTile[rand].transform.position);
 													enemy.GetComponent<MonsterGrid> ().GridDelete ();
 													enemy.GetComponent<MonsterGrid> ().GridActive = false;
@@ -88,6 +88,6 @@ public class EnemyMovement : MonoBehaviour {
 						}
 				} 
 		else
-			currMove = 2;
+			currMove = enemyUnits.Length;
 	}
 }
