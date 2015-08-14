@@ -1,0 +1,58 @@
+Initialize engine version: 5.0.2f1 (0b02744d4013)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics Family (ID=0xa16)
+    Vendor:   Intel
+    VRAM:     128 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.052 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\OhClash!_Final_Data\Managed\System.dll (this message is harmless)
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1713)
+
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1713)
+
+Seconds IN
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+Shader 'Nature/Terrain/Specular': dependency 'BaseMapShader' shader 'Hidden/TerrainEngine/Splatmap/Specular-Base' not found
+UnloadTime: 5.018510 ms
+
+Unloading 25 unused Assets to reduce memory usage. Loaded Objects now: 6128.
+Total: 2.224548 ms (FindLiveObjects: 0.433307 ms CreateObjectMapping: 0.163326 ms MarkObjects: 1.319110 ms  DeleteObjects: 0.308357 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CarScript.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at CarScript.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Failed to connect to master server at 67.225.180.24:23466
+ 
+(Filename:  Line: 236)
+
