@@ -1,27 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EnemyMovement.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameStart.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerHealth.cs" Line="54" Column="33" />
-      <File FileName="Assets\Scripts\EnemyHealth.cs" Line="53" Column="30" />
-      <File FileName="Assets\Scripts\TranslateMonster.cs" Line="149" Column="45" />
-      <File FileName="Assets\Scripts\Preview.cs" Line="51" Column="3" />
-      <File FileName="Assets\Scripts\MonsterGrid.cs" Line="76" Column="134" />
-      <File FileName="Assets\Scripts\TileModel.cs" Line="74" Column="58" />
-      <File FileName="Assets\Scripts\PlayerAttack.cs" Line="126" Column="63" />
-      <File FileName="Assets\Scripts\EnemyAttack.cs" Line="78" Column="27" />
-      <File FileName="Assets\Scripts\EnemyMovement.cs" Line="15" Column="1" />
-      <File FileName="Assets\Scripts\GameStart.cs" Line="305" Column="43" />
-      <File FileName="Assets\Scripts\GridGenerator.cs" Line="263" Column="14" />
-      <File FileName="Assets\Scripts\ThrowObject.cs" Line="72" Column="47" />
+      <File FileName="Assets\Scripts\CarScript.cs" Line="101" Column="13" />
+      <File FileName="Assets\Scripts\EnemyHealth.cs" Line="13" Column="27" />
+      <File FileName="Assets\Scripts\GameStart.cs" Line="75" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\Assets\Scripts\TranslateMonster.cs" line="142" />
-      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\Assets\Scripts\TranslateMonster.cs" line="126" />
-      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2_17092015_FINAL\FYP2\Assets\Scripts\EnemyMovement.cs" line="15" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

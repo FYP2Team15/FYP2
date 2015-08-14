@@ -72,7 +72,7 @@ public class GameStart : MonoSingleton<GameStart>
 		ccamera = camera.GetComponent <CameraControl> ();
 		GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
 		int Excluded = 0;
-		//GUI.skin.font = (Font)Resources.Load("Animal Silence");
+
 		foreach(GameObject obj in playerObj)
 		{
 			if(obj.GetComponent<CarScript>() != null)
@@ -298,6 +298,7 @@ public class GameStart : MonoSingleton<GameStart>
 
 	void OnGUI()
 	{
+		GUI.skin.font = (Font)Resources.Load("Animal Silence");
 		GUI.color = Color.yellow;
 		if(GameEndScreen)
 		{

@@ -25,8 +25,6 @@ public class CarScript : MonoBehaviour {
 			Multiplayer = true;
 			GameMultiplayer.movesleft--;
 		}
-		else
-			GameStart.movesleft--;
 	}
 
 	// Update is called once per frame
@@ -103,6 +101,10 @@ public class CarScript : MonoBehaviour {
 			if(obj.gameObject == currentTargetPassenger && currentTargetPassenger != this.gameObject)
 			{
 				obj.gameObject.GetComponent<TranslateMonster>().Stop();
+				if(Multiplayer)
+					obj.gameObject.GetComponent<MMonsterGrid>().turnOver = false;
+				else
+					obj.gameObject.GetComponent<MonsterGrid>().turnOver = false;
 				passengerSize[passengerAmt] = obj.transform.localScale;
 				obj.transform.position = this.transform.position;
 				obj.transform.localScale = new Vector3(0,0,0);
@@ -135,6 +137,7 @@ public class CarScript : MonoBehaviour {
 	[RPC]
 	void ExitCar()
 	{
+		bool someoneExit = false;
 		for(int i = 0; i < passengers.Length; i++)
 		{
 			if(passengers[i] == null)
@@ -152,6 +155,20 @@ public class CarScript : MonoBehaviour {
 					passengers[i].transform.parent = GameObject.Find("Enemy").transform;
 				passengers[i] = null;
 				passengerAmt--;
+				someoneExit = true;
+			}
+		}
+		if(someoneExit)
+		{
+			if(Multiplayer)
+			{
+				GameMultiplayer.movesleft--;
+				GetComponent<MMonsterGrid>().turnOver = true;
+			}
+			else
+			{
+				GameStart.movesleft--;
+				GetComponent<MonsterGrid>().turnOver = true;
 			}
 		}
 	}
