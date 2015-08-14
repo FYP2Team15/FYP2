@@ -7,11 +7,14 @@ public class Explode : MonoBehaviour {
 	public bool ExplodeAfterTranslate = false;
 	bool startedMoving = false;
 	public bool hasAudio = false;
+	public string target = "NonAlly";
 	GameObject audio = new GameObject();
 	public AudioClip translateSound;
 	// Use this for initialization
 	void Start () {
 		audio = GameObject.Find ("Sfx");
+		if (audio == null)
+			hasAudio = false;
 		if(GameObject.Find("Multiplayer") != null)
 			Multiplayer = true;
 	}
@@ -61,23 +64,28 @@ public class Explode : MonoBehaviour {
 			if(GetComponent<TranslateMonster>().TMonster && !startedMoving)
 				startedMoving = true;
 			if(!GetComponent<TranslateMonster>().TMonster && startedMoving)
-				Explosion("NonAlly");
+				Explosion(target);
 		}
 	}
 
 	#if UNITY_EDITOR || UNITY_STANDALONE_WIN
 	void OnMouseOver () {
 		if (Input.GetMouseButton (1)) {//when rightclick
-			if (this.tag == "Player")
-				Explosion("EnemyMonster");
-			else if (this.tag == "EnemyMonster")
-				Explosion("Player");
+			if(Multiplayer)
+			{
+				if (this.tag == "Player")
+					Explosion("EnemyMonster");
+				else if (this.tag == "EnemyMonster")
+					Explosion("Player");
+			}
+			else if(this.tag == "Player")
+				Explosion("NonAlly");
 		}
 	}
 	#endif
 
 	void Explosion(string target) {
-		Collider[] hitColliders = Physics.OverlapSphere (this.transform.position, 2);
+		Collider[] hitColliders = Physics.OverlapSphere (this.transform.position, 2.5f);
 		foreach(Collider obj in hitColliders)//find target in aoe
 		{
 			if (target == "All")
@@ -93,7 +101,7 @@ public class Explode : MonoBehaviour {
 				else
 					Destroy(obj.gameObject);//destroy target
 			}
-			if (target == "NonAlly" && obj.tag != this.tag && obj.tag != "Compulsory" && obj.tag != "MainCamera" && obj.tag != "BattleCamera")
+			if (target == "NonAlly" && obj.tag != this.tag && obj.tag != "Terrain" && obj.tag != "Compulsory" && obj.tag != "MainCamera" && obj.tag != "BattleCamera")
 			{//if target is enemy
 				if(Multiplayer)
 				{
@@ -101,7 +109,7 @@ public class Explode : MonoBehaviour {
 					nv.RPC("MDestroy", RPCMode.Others,obj.name,obj.tag, true);//send to client
 				}
 				//Instantiate (EParticle, transform.position, Quaternion.identity);
-				if(obj.transform.parent != null)//if parent exist
+				if(obj.transform.parent != null && obj.name == "Trigger")//if parent exist
 					Destroy(obj.transform.parent.gameObject);//destroy parent
 				else
 					Destroy(obj.gameObject);//destroy target
@@ -113,8 +121,10 @@ public class Explode : MonoBehaviour {
 					NetworkView nv = GetComponent<NetworkView>();
 					nv.RPC("MDestroy", RPCMode.Others,obj.name,obj.tag, false);//send to client
 				}
-				//Instantiate (EParticle, transform.position, Quaternion.identity);
-				Destroy(obj.gameObject);//destroy target
+				if(obj.transform.parent != null && obj.name == "Trigger")//if parent exist
+					Destroy(obj.transform.parent.gameObject);//destroy parent
+				else
+					Destroy(obj.gameObject);//destroy target
 			}
 		}
 		if (Multiplayer) {

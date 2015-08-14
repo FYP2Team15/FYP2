@@ -14,6 +14,7 @@ public class TranslateMonster : MonoBehaviour {
 	CameraControl ccamera;
 	Animation anim;
 	GameObject audio = new GameObject();
+	[HideInInspector]public bool notActuallyOver = false;
 	public AudioClip translateSound;
 	// Use this for initialization
 	void Start () {
@@ -127,7 +128,13 @@ public class TranslateMonster : MonoBehaviour {
 		GameStart.disableGrid = false;
 		GameStart.disableCameraControl = false;
 		//if(this.tag == "Player")
-		GameStart.movesleft--;
+		if(!notActuallyOver)
+			GameStart.movesleft--;
+		else
+		{
+			this.GetComponent<MonsterGrid> ().turnOver = false;
+			notActuallyOver = false;
+		}
 		if(hasAnimation)
 			anim.Play (idleName);
 			//anim.Play("idle");

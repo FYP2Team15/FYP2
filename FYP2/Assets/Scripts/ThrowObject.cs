@@ -17,6 +17,8 @@ public class ThrowObject : MonoBehaviour {
 
 	void Start () {
 		audio = GameObject.Find ("Sfx");
+		if (audio == null)
+			hasAudio = false;
 		if(GameObject.Find("Multiplayer") != null)
 		{
 			Multiplayer = true;
@@ -66,7 +68,7 @@ public class ThrowObject : MonoBehaviour {
 	}
 	void single()
 	{
-		if(GameStart.Player1() && this.tag == "Player" && !this.GetComponent<MonsterGrid>().turnOver && rightClickState == 0 )
+		if(GameStart.Player1() && this.tag == "Player" && !this.GetComponent<MonsterGrid>().throwOver && rightClickState == 0 )
 		{
 			if(this.GetComponent<Preview>().GridActive)
 				this.GetComponent<Preview>().GridDelete();
@@ -95,6 +97,7 @@ public class ThrowObject : MonoBehaviour {
 		GridDelete ();
 		GameObject go1 = Instantiate (thrownObject, this.transform.position, Quaternion.identity) as GameObject;
 		go1.name = name + "_T";
+		this.GetComponent<MonsterGrid> ().throwOver = true;
 		go1.transform.SetParent(this.transform);
 		go1.GetComponent<TranslateMonster>().Translate(true, Pos-go1.GetComponent<MonsterGrid>().Offset);
 	}

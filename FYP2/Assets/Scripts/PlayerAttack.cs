@@ -33,6 +33,8 @@ public class PlayerAttack : MonoBehaviour {
 	bool Multiplayer = false;
 	// Use this for initialization
 	void Start () {
+		if (texture == null)
+			texture = GameObject.Find ("Battle_Button").GetComponent<GUITexture>();
 		TimeCount = 0;
 		PlayerAttacked = false;
 		StartTCount = false;

@@ -77,6 +77,9 @@ public class TileModel : GridModel {
 			MonsterScript.GridDelete ();
 			TranslateMonster TMonster = MonsterScript.specialTarget.GetComponent<TranslateMonster>();
 			GameStart.disableGrid = true;
+			//GameStart.movesleft++;
+			MonsterScript.throwOver = true;
+			TMonster.notActuallyOver = true;
 			TMonster.Translate (true, this.transform.position-TMonster.GetComponent<MonsterGrid>().Offset, true);
 			MonsterScript.specialTarget = null;
 		}

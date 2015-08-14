@@ -262,6 +262,7 @@ public class GameStart : MonoSingleton<GameStart>
 						Excluded ++;
 				}
 				obj.GetComponent<MonsterGrid>().turnOver = false;
+				obj.GetComponent<MonsterGrid>().throwOver = false;
 			}
 			movesleft = playerObj.Length-Excluded;
 			ccamera.target = playerObj[0].transform;

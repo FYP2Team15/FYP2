@@ -179,12 +179,14 @@ public class MCheckGrid : MonoBehaviour {
 					nv.RPC("Combine", RPCMode.Others,1);
 				}
 			}
-			if (hitColliders [i].transform.tag == "Player" && this.tag == "EnemyMonster" && !hitColliders[i].GetComponent<PlayerAttack>().attacking) {//if this is player and collided to enemy
+			if (hitColliders [i].transform.tag == "Player" && this.tag == "EnemyMonster" 
+			    && !hitColliders[i].GetComponent<PlayerAttack>().attacking && !GetComponent<EnemyAttack>().attacking) {//if this is player and collided to enemy
 				hitColliders[i].GetComponent<PlayerAttack>().StartAttack(this.gameObject);//attack enemy
 				GetComponent<EnemyAttack>().StartEnAttack(hitColliders[i].gameObject,false);//attack player
 
 			}
-			if (hitColliders [i].transform.tag == "EnemyMonster" && this.tag == "Player" && !hitColliders[i].GetComponent<EnemyAttack>().attacking) {//if this is player and collided to enemy
+			if (hitColliders [i].transform.tag == "EnemyMonster" && this.tag == "Player"
+			    && !hitColliders[i].GetComponent<EnemyAttack>().attacking && !GetComponent<PlayerAttack>().attacking) {//if this is player and collided to enemy
 				hitColliders[i].GetComponent<EnemyAttack>().StartEnAttack(this.gameObject,false);//attack enemy
 				GetComponent<PlayerAttack>().StartAttack(hitColliders[i].gameObject);//attack player
 			}

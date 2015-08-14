@@ -60,7 +60,7 @@ public class CarScript : MonoBehaviour {
 	void multi()
 	{
 		if (GetComponent<TranslateMonster> ().TMonster) {
-			Collider[] hitColliders = Physics.OverlapSphere (this.transform.position, 2.0f);
+			Collider[] hitColliders = Physics.OverlapSphere (this.transform.position, 1.0f);
 			foreach(Collider obj in hitColliders)
 			{
 				if(obj.tag == "EnemyMonster" && this.tag == "Player" || this.tag == "EnemyMonster" && obj.tag == "Player" )
@@ -163,11 +163,13 @@ public class CarScript : MonoBehaviour {
 			if(Multiplayer)
 			{
 				GameMultiplayer.movesleft--;
+				GetComponent<MMonsterGrid>().GridDelete();
 				GetComponent<MMonsterGrid>().turnOver = true;
 			}
 			else
 			{
 				GameStart.movesleft--;
+				GetComponent<MonsterGrid>().GridDelete();
 				GetComponent<MonsterGrid>().turnOver = true;
 			}
 		}

@@ -15,6 +15,7 @@ public class MonsterGrid : MonoBehaviour
 	public Vector3 Offset = new Vector3(0,0,0);
 	[HideInInspector]public bool GridActive = false;
 	[HideInInspector]public bool turnOver = false;
+	[HideInInspector]public bool throwOver = false;
 	int rightClickState = 0; 
 	[HideInInspector]public GameObject specialTarget = null;//special target
 	private Vector3 stoPosition = new Vector3(0,0,0) ;//special target original pos
@@ -66,7 +67,7 @@ public class MonsterGrid : MonoBehaviour
 
 	void OnMouseOver () {
 		if (Input.GetMouseButton(1) && hasSTile  && Time.timeScale > 0) {
-			if(GameStart.Player1() && this.tag == "Player" && !turnOver && rightClickState == 0 )
+			if(GameStart.Player1() && this.tag == "Player" && !throwOver && rightClickState == 0 )
 			{
 				if(!GameStart.disableGrid)
 				{

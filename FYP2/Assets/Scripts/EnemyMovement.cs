@@ -24,6 +24,8 @@ public class EnemyMovement : MonoBehaviour {
 												int i = 0;
 												bool moved = false;
 												while (i < hitColliders.Length) {
+														if (hitColliders [i].transform.tag == "Obstacle")
+															break;
 														if (hitColliders [i].transform.name == "Child") {
 															moved = Move(enemy, hitColliders [i].gameObject);
 																break;

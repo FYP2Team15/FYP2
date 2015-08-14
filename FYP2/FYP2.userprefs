@@ -1,14 +1,28 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameStart.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerAttack.cs">
     <Files>
-      <File FileName="Assets\Scripts\CarScript.cs" Line="101" Column="13" />
-      <File FileName="Assets\Scripts\EnemyHealth.cs" Line="13" Column="27" />
-      <File FileName="Assets\Scripts\GameStart.cs" Line="75" Column="3" />
+      <File FileName="Assets\Scripts\PlayerAttack.cs" Line="40" Column="23" />
+      <File FileName="Assets\Scripts\TranslateMonster.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MusicPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MonsterGrid.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TileModel.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameStart.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Explode.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MonsterExplode.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ThrowObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CarScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EnemyMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EnemyAttack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CheckGrid.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MCheckGrid.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2_week17\FYP2_17092015_FINAL\FYP2\Assets\Scripts\MCheckGrid.cs" line="185" />
+      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2_week17\FYP2_17092015_FINAL\FYP2\Assets\Scripts\MCheckGrid.cs" line="190" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

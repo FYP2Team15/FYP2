@@ -138,7 +138,8 @@ public class CheckGrid : MonoBehaviour {
 										}
 								}
 
-								if (hitColliders [i].transform.tag == "EnemyMonster" && this.tag == "Player" && !hitColliders [i].GetComponent<EnemyAttack> ().attacking) {//if this is player and collided to enemy
+								if (hitColliders [i].transform.tag == "EnemyMonster" && this.tag == "Player" 
+				    && !hitColliders [i].GetComponent<EnemyAttack> ().attacking && !GetComponent<PlayerAttack> ().attacking) {//if this is player and collided to enemy
 										hitColliders [i].GetComponent<EnemyAttack> ().StartEnAttack (this.gameObject);//attack enemy
 
 										GetComponent<PlayerAttack> ().StartAttack (hitColliders [i].gameObject);//attack player
