@@ -104,7 +104,7 @@ public class EnemyHealth : MonoBehaviour {
 			rect3.y = rect2.y + 15;
 			Rect rect4 = rect3;
 			rect4.y = rect3.y + 15;
-			GUI.skin.font = (Font)Resources.Load("Animal Silence");
+
 			//GUI.skin.label.fontSize = (int)ScaleToWidth(GUI.skin.font.fontSize);
 			GUI.TextField(rect, this.name);
 			GUI.Label(rect2, "C " + charCount.ToString()); // display its name, or other string

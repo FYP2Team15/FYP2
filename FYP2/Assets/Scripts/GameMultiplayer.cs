@@ -132,6 +132,7 @@ public class GameMultiplayer : MonoSingleton<GameMultiplayer>
 	[RPC]
 	public void GameInit (bool client)
 	{
+		//GUI.skin.font = (Font)Resources.Load("Animal Silence");
 		turn = 1;
 		if(client)
 		you = PlayerM.Player2;

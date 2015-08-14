@@ -19,6 +19,7 @@ $RECYCLE.BIN/
 
 # Ignore
 *.meta
+*/FYP2/FYP2/Library/metadata
 
 # =========================
 # Operating System Files
@@ -44,3 +45,4 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.info

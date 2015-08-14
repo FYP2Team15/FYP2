@@ -105,7 +105,7 @@ public class PlayerHealth : MonoBehaviour {
 			rect3.y = rect2.y + 15;
 			Rect rect4 = rect3;
 			rect4.y = rect3.y + 15;
-			GUI.skin.font = (Font)Resources.Load("Animal Silence");
+
 			GUI.TextField(rect, this.name); // display its name, or other string
 			GUI.Label(rect2, "C " + charCount.ToString()); // display its name, or other string
 			GUI.Label (rect3, "Health:  " + (CurArmor*charCount).ToString() + "/" + (Armor*charCount).ToString());	
