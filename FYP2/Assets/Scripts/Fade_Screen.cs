@@ -9,7 +9,12 @@ public class Fade_Screen : MonoBehaviour {
 	private int drawDepth = -1000;
 	private float alpha = 1.0f;
 	private int fadeDir = -1;
+	public GameObject GameStart;
+	bool firstTime = true;
 
+	void Start () {
+
+	}
 	void OnGUI(){
 
 		alpha += fadeDir * FadeSpeed * Time.deltaTime;
@@ -29,4 +34,12 @@ public class Fade_Screen : MonoBehaviour {
 	void OnLevelWasLoaded(){
 				BeginFade (-1);
 		}
+
+	void Update(){
+		if(alpha <= 0 && GameStart != null && firstTime)
+		{
+			GameStart.GetComponent<GameStart>().PanToVictory();
+			firstTime = false;
+		}
+	}
 }

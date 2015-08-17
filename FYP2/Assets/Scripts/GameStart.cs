@@ -23,8 +23,13 @@ public enum Player
 public class GameStart : MonoSingleton<GameStart>
 {
 	private int TurnLeft = 0;
-	public int totalTurn = 10;
+	public int totalTurn = 30;
 	public string NextScene = "MainPage";
+	public GameObject VictoryTile;
+	public GameObject startingPosition;
+	bool startOPCD = false;
+	float countDownAP = 0;
+	bool VictoryPan = false;
 	public GameObject WinScreen;
 	public GameObject LoseScreen;
 	public string file = "Assets/Save.txt";
@@ -88,6 +93,16 @@ public class GameStart : MonoSingleton<GameStart>
 		TurnLeft = totalTurn;
 		movesleft = playerObj.Length-Excluded;
 	}
+	public void PanToVictory()
+	{
+		if (VictoryTile != null)
+		{
+			ccamera.target = VictoryTile.transform;
+			TargetObj = VictoryTile;
+			cameraPan = true;
+			VictoryPan = true;
+		}
+	}
 	//public void Start()
 	//{
 	//	GridCamera.RaycastOn();
@@ -110,6 +125,17 @@ public class GameStart : MonoSingleton<GameStart>
 	//	
 	//}
 	void Update () {
+		if (startOPCD)
+		{
+			countDownAP += Time.deltaTime;
+			if(countDownAP > 2)
+			{
+				ccamera.target = startingPosition.transform;
+				TargetObj = startingPosition;
+				cameraPan = true;
+				startOPCD = false;
+			}
+		}
 				#if UNITY_EDITOR || UNITY_STANDALONE_WIN
 		if (Input.GetKeyDown ("f") && Player1 () && !GameObject.Find("BattleCamera").GetComponent<Camera>().enabled 
 		    && !disableCameraControl)
@@ -133,6 +159,12 @@ public class GameStart : MonoSingleton<GameStart>
 					if (ccamera.transform.position == TargetObj.transform.position+ccamera.offset) {
 						ccamera.target = null;
 						cameraPan = false;
+						if (VictoryPan)
+						{
+							startOPCD = true;
+							VictoryPan = false;
+							
+						}
 					}
 				}
 

@@ -303,6 +303,54 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 		Vector3 Horizontal2 = new Vector3 (0, 0, height - 1);//translation for 2nd horizontal
 		GenerateH (name,obj,origin+Horizontal2,width, objectCount,parent);//draw 2nd horizontal
 	}
+
+	public void GenerateSq (string name,GameObject obj,GameObject obj2, Vector3 origin, int width, int height, string[] Obstacles,Transform parent = null, bool once = false)//box
+	{
+		int objCount = 0;
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				Vector3 position = origin + new Vector3 (x-(width/2), 0, y-(height/2));
+				Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
+				bool obsHit = false;
+				for(int i = 0; i < hitColliders.Length; i++)
+				{
+					for(int j = 0; j < Obstacles.Length; j++)
+					{
+						if(hitColliders[i].transform.tag == Obstacles[j])//check for obstacle
+						{
+							obsHit = true;
+							break;//return true and end loop
+						}
+					}
+					if(obsHit)
+						break;
+				}
+				if(obsHit)//end loop if hit obstacle
+				{
+					GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
+					go.name = name + "_T" + objCount;
+					objCount++;
+					GridModel model = go.GetComponent<GridModel>();
+					model.coord = new Coord(x,y);
+					tiles.Add (go);
+					go.transform.SetParent(parent);
+				}
+
+				else
+				{
+					GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+					go.name = name + "_T" + objCount;
+					objCount++;
+					//go.tag = name;
+					GridModel model = go.GetComponent<GridModel> ();
+					model.coord = new Coord (x, 0);
+					tiles.Add (go);
+					go.transform.SetParent(parent);
+				}
+			}
+		}
+	}
+
 	public void GenerateT (string name,GameObject obj,GameObject obj2, Vector3 origin, int width, int height, string[] Obstacles, Transform parent = null, bool once = false)//t shape
 	{
 		int objCount = 0;

@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraControl : MonoBehaviour {
 	
 	public Transform target = null;
-	public Vector3 offset = new Vector3(3,5,-3);
+	public Vector3 offset = new Vector3(3,7,-3);
 	private float time;
 	private Vector3 desired;
 	public Vector3 normalRotation = new Vector3(45,315,0);

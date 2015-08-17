@@ -1,27 +1,42 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerAttack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Preview.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerAttack.cs" Line="40" Column="23" />
-      <File FileName="Assets\Scripts\TranslateMonster.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MusicPlayer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MonsterGrid.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TileModel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameStart.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Explode.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MonsterExplode.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ThrowObject.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CarScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnemyMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnemyAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CheckGrid.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MCheckGrid.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TranslateMonster.cs" Line="118" Column="4" />
+      <File FileName="Assets\Scripts\MonsterGrid.cs" Line="15" Column="2" />
+      <File FileName="Assets\Scripts\GridGenerator.cs" Line="312" Column="74" />
+      <File FileName="Assets\Scripts\MapTileSpawn.cs" Line="24" Column="27" />
+      <File FileName="Assets\Scripts\GameStart.cs" Line="132" Column="5" />
+      <File FileName="Assets\Scripts\Preview.cs" Line="72" Column="5" />
+      <File FileName="Assets\Scripts\MMonsterGrid.cs" Line="117" Column="3" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Preview.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>type</Value>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2_week17\FYP2_17092015_FINAL\FYP2\Assets\Scripts\MCheckGrid.cs" line="185" />
-      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2_week17\FYP2_17092015_FINAL\FYP2\Assets\Scripts\MCheckGrid.cs" line="190" />
+      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2\FYP2\Assets\Scripts\GridGenerator.cs" line="331" />
+      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2\FYP2\Assets\Scripts\GridGenerator.cs" line="319" />
+      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2\FYP2\Assets\Scripts\GridGenerator.cs" line="321" />
+      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2\FYP2\Assets\Scripts\MonsterGrid.cs" line="126" />
+      <Breakpoint file="C:\Users\-\Desktop\fup\FYP2\FYP2\Assets\Scripts\MonsterGrid.cs" line="125" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

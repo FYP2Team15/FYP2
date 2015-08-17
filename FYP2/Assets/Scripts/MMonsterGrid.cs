@@ -8,6 +8,7 @@ public class MMonsterGrid : MonoBehaviour {
 	public string[] Obstacles;
 	public bool hasSTile = true;
 	public int range = 5;
+	public int type = 1;//0 = t shape, 1 = square shape
 	public Vector3 Offset = new Vector3(0,0,0);
 	[HideInInspector]public bool GridActive = false;
 	[HideInInspector]public bool turnOver = false;
@@ -113,26 +114,73 @@ public class MMonsterGrid : MonoBehaviour {
 	{
 		GridCamera.RaycastOn ();
 		//GridGenerator.instance.Clear ();
-		GridGenerator.instance.GenerateT (this.name,tile,tile2, this.transform.position+Offset, range, range, Obstacles,this.transform);
-		
+		switch(type)
+		{
+		case 0:
+			GridGenerator.instance.GenerateT (this.name,tile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform);
+			break;
+		case 1:
+			GridGenerator.instance.GenerateSq (this.name,tile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform);
+			break;
+		default:
+			GridGenerator.instance.GenerateT (this.name,tile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform);
+			break;
+		}
+		if(this.tag == "Player")
+			this.GetComponent<PlayerHealth>().displayStat = true;
+		if(this.tag == "EnemyMonster")
+			this.GetComponent<EnemyHealth>().displayStat = true;
 	}
 	
 	public void GridInitSpecial ()
 	{
 		GridCamera.RaycastOn ();
 		//GridGenerator.instance.Clear ();
-		GridGenerator.instance.GenerateT (this.name,specialTile,tile2, this.transform.position+Offset, range, range, Obstacles,this.transform);
-		
+		switch(type)
+		{
+		case 0:
+			GridGenerator.instance.GenerateT (this.name,specialTile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform);
+			break;
+		case 1:
+			GridGenerator.instance.GenerateSq (this.name,specialTile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform);
+			break;
+		default:
+			GridGenerator.instance.GenerateT (this.name,tile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform);
+			break;
+		}
 	}
 	
 	public void GridDelete ()
 	{
-		for (int x = 0; x < (range*4-3); x++)
+		switch(type)
 		{
-			string tile = this.name + "_T"  + (x);
-			GridGenerator.instance.Delete (tile);
+		case 0:
+			for (int x = 0; x < (range*4-3); x++)
+			{
+				string tile = this.name + "_T"  + (x);
+				GridGenerator.instance.Delete (tile);
+			}
+			break;
+		case 1:
+			for (int x = 0; x < (range*range); x++)
+			{
+				string tile = this.name + "_T"  + (x);
+				GridGenerator.instance.Delete (tile);
+			}
+			break;
+		default:
+			for (int x = 0; x < (range*4-3); x++)
+			{
+				string tile = this.name + "_T"  + (x);
+				GridGenerator.instance.Delete (tile);
+			}
+			break;
 		}
 		GridGenerator.instance.tiles.RemoveAll(item => item == null);
+		if(this.tag == "Player")
+			this.GetComponent<PlayerHealth>().displayStat = false;
+		if(this.tag == "EnemyMonster")
+			this.GetComponent<EnemyHealth>().displayStat = false;
 	}
 	public bool GridCheck (string name)
 	{
