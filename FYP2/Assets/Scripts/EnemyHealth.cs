@@ -16,6 +16,7 @@ public class EnemyHealth : MonoBehaviour {
 	public float healthBarL;
 	GameObject audio = new GameObject();
 	public AudioClip translateSound;
+	public int nameLength = 5;
 	//public Slider HpSlider;
 	
 	PlayerAttack PA;
@@ -106,8 +107,7 @@ public class EnemyHealth : MonoBehaviour {
 			rect4.y = rect3.y + 15;
 
 			//GUI.skin.label.fontSize = (int)ScaleToWidth(GUI.skin.font.fontSize);
-			GUI.TextField(rect, this.name);
-			GUI.Label(rect2, "C " + charCount.ToString()); // display its name, or other string
+			GUI.TextField(rect, this.name.Substring (0, nameLength));
 			GUI.Label (rect3, "Health:  " + (CurArmor*charCount).ToString() + "/" + (Armor*charCount).ToString());	
 			GUI.Label (rect4, "Char count: " + charCount.ToString());
 			GUI.Box (new Rect (10, 500, this.healthBarL, 20), this.CurArmor + "/" + this.Armor);

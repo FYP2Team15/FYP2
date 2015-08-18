@@ -6,6 +6,7 @@ public class MonsterGrid : MonoBehaviour
 {
 	public GameObject tile;//normal tile
 	public GameObject tile2;//collided tile
+	public GameObject tile3;//combined tile
 	public GameObject specialTile;//special tile
 	CheckGrid CG;
 	public bool PlPaused;
@@ -123,13 +124,13 @@ public class MonsterGrid : MonoBehaviour
 		switch(type)
 		{
 			case 0:
-				GridGenerator.instance.GenerateT (this.name,tile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform);
+				GridGenerator.instance.GenerateT (this.name,tile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform,false,tile3,GetComponent<CheckGrid>().nameLength);
 				break;
 			case 1:
-				GridGenerator.instance.GenerateSq (this.name,tile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform);
+				GridGenerator.instance.GenerateSq (this.name,tile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform,false,tile3,GetComponent<CheckGrid>().nameLength);
 				break;
 			default:
-				GridGenerator.instance.GenerateT (this.name,tile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform);
+				GridGenerator.instance.GenerateT (this.name,tile,tile2, this.transform.position+Offset, range, range,Obstacles,this.transform,false,tile3,GetComponent<CheckGrid>().nameLength);
 				break;
 		}
 		if(this.tag == "Player")

@@ -12,6 +12,10 @@ public class CheckGrid : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		PlayPause = true;
+		if(this.tag == "Player")
+		GetComponent<PlayerHealth> ().nameLength = nameLength;
+		else if(this.tag == "EnemyMonster")
+		GetComponent<EnemyHealth> ().nameLength = nameLength;
 	}
 	#if UNITY_EDITOR || UNITY_STANDALONE_WIN
 	void OnMouseDown ()
@@ -48,9 +52,14 @@ public class CheckGrid : MonoBehaviour {
 								tiles = Physics.OverlapSphere (this.transform.position+this.GetComponent<MonsterGrid>().Offset,0);
 							int j = 0;
 							bool onTile = false;
+							bool MergeTile = false;
 							while (j < tiles.Length) {
 								if (tiles [j].transform.tag == "PlayerTile") {
 									onTile = true;
+									break;
+								}
+								if (tiles [j].transform.tag == "MergeTile") {
+									MergeTile = true;
 									break;
 								}
 								j++;
@@ -64,7 +73,7 @@ public class CheckGrid : MonoBehaviour {
 								go2.GetComponent<TranslateMonster> ().Translate (true, this.transform.position+this.GetComponent<MonsterGrid>().Offset);
 								this.GetComponent<CarScript>().EnterWhenReached(go2);
 							}
-							else if (go2.tag == this.tag && onTile && this.name.Substring (0, nameLength - 1) == go2.name.Substring (0, nameLength - 1)) {
+							else if (go2.tag == this.tag && MergeTile && this.name.Substring (0, nameLength) == go2.name.Substring (0, nameLength)) {
 								if (MonsterScript2.GridActive) {//Closes grid after checking
 									MonsterScript2.GridDelete ();
 									MonsterScript2.GridActive = false;
@@ -130,6 +139,7 @@ public class CheckGrid : MonoBehaviour {
 												}
 												this.GetComponent<MonsterGrid> ().GridActive = false;
 												GameStart.disableGrid = false;
+												GameStart.disableCameraControl = false;
 												setToCombine = false;
 												Destroy (hitColliders [i].gameObject);//destroy the other gameobject
 												PlayerT = true;

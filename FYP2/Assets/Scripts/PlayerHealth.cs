@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour {
 	private bool displayHp = false;
 	public float healthBarL;
 	public bool hasAudio = false;
-	
+	public int nameLength = 5;
 	
 	GameObject audio = new GameObject();
 	public AudioClip translateSound;
@@ -106,8 +106,7 @@ public class PlayerHealth : MonoBehaviour {
 			Rect rect4 = rect3;
 			rect4.y = rect3.y + 15;
 
-			GUI.TextField(rect, this.name); // display its name, or other string
-			GUI.Label(rect2, "C " + charCount.ToString()); // display its name, or other string
+			GUI.TextField(rect, this.name.Substring (0, nameLength)); // display its name, or other string
 			GUI.Label (rect3, "Health:  " + (CurArmor*charCount).ToString() + "/" + (Armor*charCount).ToString());	
 			GUI.Label (rect4, "Char count: " + charCount.ToString());
 			//GUI.Box (new Rect (10, 500, this.healthBarL, 20), this.CurArmor + "/" + this.Armor);

@@ -92,6 +92,8 @@ public class GameStart : MonoSingleton<GameStart>
 		}
 		TurnLeft = totalTurn;
 		movesleft = playerObj.Length-Excluded;
+		disableGrid = true;
+		disableCameraControl = true;
 	}
 	public void PanToVictory()
 	{
@@ -134,6 +136,8 @@ public class GameStart : MonoSingleton<GameStart>
 				TargetObj = startingPosition;
 				cameraPan = true;
 				startOPCD = false;
+				disableGrid = false;
+				disableCameraControl = false;
 			}
 		}
 				#if UNITY_EDITOR || UNITY_STANDALONE_WIN
@@ -152,7 +156,7 @@ public class GameStart : MonoSingleton<GameStart>
 				if (Input.GetMouseButtonDown (0) && state == GameState.Lost) {
 						Application.LoadLevel ("MainPage");
 				}
-				if (movesleft <= 0 && state == GameState.Playing) {
+		if (movesleft <= 0 && state == GameState.Playing && !GameObject.Find("BattleCamera").GetComponent<Camera>().enabled) {
 					Step();		
 				}
 				if (cameraPan && TargetObj != null) {

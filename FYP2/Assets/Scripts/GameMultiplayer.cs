@@ -206,7 +206,7 @@ public class GameMultiplayer : MonoSingleton<GameMultiplayer>
 			}
 		}
 		#endif
-		if (movesleft == 0 && state == GameStateM.Playing) {
+		if (movesleft == 0 && state == GameStateM.Playing && !GameObject.Find("BattleCamera").GetComponent<Camera>().enabled) {
 			Step();		
 		}
 		if (Input.GetMouseButtonDown (0) && state == GameStateM.Complete

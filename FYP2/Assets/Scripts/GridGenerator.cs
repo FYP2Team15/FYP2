@@ -304,54 +304,7 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 		GenerateH (name,obj,origin+Horizontal2,width, objectCount,parent);//draw 2nd horizontal
 	}
 
-	public void GenerateSq (string name,GameObject obj,GameObject obj2, Vector3 origin, int width, int height, string[] Obstacles,Transform parent = null, bool once = false)//box
-	{
-		int objCount = 0;
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				Vector3 position = origin + new Vector3 (x-(width/2), 0, y-(height/2));
-				Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
-				bool obsHit = false;
-				for(int i = 0; i < hitColliders.Length; i++)
-				{
-					for(int j = 0; j < Obstacles.Length; j++)
-					{
-						if(hitColliders[i].transform.tag == Obstacles[j])//check for obstacle
-						{
-							obsHit = true;
-							break;//return true and end loop
-						}
-					}
-					if(obsHit)
-						break;
-				}
-				if(obsHit)//end loop if hit obstacle
-				{
-					GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
-					go.name = name + "_T" + objCount;
-					objCount++;
-					GridModel model = go.GetComponent<GridModel>();
-					model.coord = new Coord(x,y);
-					tiles.Add (go);
-					go.transform.SetParent(parent);
-				}
-
-				else
-				{
-					GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
-					go.name = name + "_T" + objCount;
-					objCount++;
-					//go.tag = name;
-					GridModel model = go.GetComponent<GridModel> ();
-					model.coord = new Coord (x, 0);
-					tiles.Add (go);
-					go.transform.SetParent(parent);
-				}
-			}
-		}
-	}
-
-	public void GenerateT (string name,GameObject obj,GameObject obj2, Vector3 origin, int width, int height, string[] Obstacles, Transform parent = null, bool once = false)//t shape
+	public void GenerateSq (string name,GameObject obj,GameObject obj2, Vector3 origin, int width, int height, string[] Obstacles,Transform parent = null, bool once = false,GameObject obj3 = null, int nameLength = 3)//box
 	{
 		int objCount = 0;
 		Vector3 position1 = origin + new Vector3 (0, 0, 0);
@@ -364,6 +317,301 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 		tiles.Add (go1);
 		go1.transform.SetParent(parent);
 		bool obsHit1 = false;//init obstacle hit 1
+		bool Merge = false;
+		for (int x = 1; x < width; x++) {
+			Vector3 position = origin + new Vector3 (x, 0, x);
+			Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
+			
+			for(int i = 0; i < hitColliders.Length; i++)
+			{
+				for(int j = 0; j < Obstacles.Length; j++)
+				{
+					if(obj3 != null)
+					{
+						if(parent.name.Substring (0, nameLength - 1) == hitColliders[i].name.Substring (0, nameLength - 1))//check for obstacle
+						{
+							obsHit1 = true;
+							Merge = true;
+						}
+						else if(hitColliders[i].transform.tag == parent.transform.tag)
+							obsHit1 = true;
+					}
+					else if(hitColliders[i].transform.tag == parent.transform.tag)
+						obsHit1 = true;
+					if(hitColliders[i].transform.tag == Obstacles[j])//check for obstacle
+					{
+						obsHit1 = true;
+					}
+					if(obsHit1)
+						break;
+				}
+				if(obsHit1)
+					break;
+			}
+			if(Merge)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj3, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (x, 0);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit1 = false;
+				Merge = false;
+			}
+			else if(obsHit1)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (x, 0);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit1 = false;
+			}
+			else
+			{
+				GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (x, 0);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+			}
+		}
+		bool obsHit2 = false;//init obstacle hit 2
+		for (int x = 1; x < width; x++) {
+			Vector3 position = origin + new Vector3 (-x, 0, x);
+			Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
+			
+			for(int i = 0; i < hitColliders.Length; i++)
+			{
+				for(int j = 0; j < Obstacles.Length; j++)
+				{
+					if(obj3 != null)
+					{
+						if(parent.name.Substring (0, nameLength - 1) == hitColliders[i].name.Substring (0, nameLength - 1))//check for obstacle
+						{
+							obsHit2 = true;
+							Merge = true;
+						}
+						else if(hitColliders[i].transform.tag == parent.transform.tag)
+							obsHit2 = true;
+					}
+					else if(hitColliders[i].transform.tag == parent.transform.tag)
+						obsHit2 = true;
+					if(hitColliders[i].transform.tag == Obstacles[j])//check for obstacle
+					{
+						obsHit2 = true;
+					}
+					if(obsHit2)
+						break;
+				}
+				if(obsHit2)
+					break;
+			}
+			if(Merge)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj3, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (-x, 0);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit2 = false;
+				Merge = false;
+			}
+			else if(obsHit2)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (-x, 0);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit2 = false;
+			}
+			else
+			{
+				GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (-x, 0);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+			}
+		}
+		bool obsHit3 = false;//init obstacle hit 3
+		for (int y = 1; y < height; y++) {
+			Vector3 position = origin + new Vector3 (y, 0, -y);
+			Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
+			
+			for(int i = 0; i < hitColliders.Length; i++)
+			{
+				for(int j = 0; j < Obstacles.Length; j++)
+				{
+					if(obj3 != null)
+					{
+						if(parent.name.Substring (0, nameLength - 1) == hitColliders[i].name.Substring (0, nameLength - 1))//check for obstacle
+						{
+							obsHit3 = true;
+							Merge = true;
+						}
+						else if(hitColliders[i].transform.tag == parent.transform.tag)
+							obsHit3 = true;
+					}
+					else if(hitColliders[i].transform.tag == parent.transform.tag)
+						obsHit3 = true;
+					if(hitColliders[i].transform.tag == Obstacles[j])//check for obstacle
+					{
+						obsHit3 = true;
+					}
+					if(obsHit3)
+						break;
+				}
+				if(obsHit3)
+					break;
+			}
+			if(Merge)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj3, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, y);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit3 = false;
+			}
+			else if(obsHit3)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, y);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit3 = false;
+			}
+			else
+			{
+				GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, y);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+			}
+		}
+		bool obsHit4 = false;//init obstacle hit 4
+		for (int y = 1; y < height; y++) {
+			Vector3 position = origin + new Vector3 (-y, 0, -y);
+			Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
+			
+			for(int i = 0; i < hitColliders.Length; i++)
+			{
+				for(int j = 0; j < Obstacles.Length; j++)
+				{
+					if(obj3 != null)
+					{
+						if(parent.name.Substring (0, nameLength - 1) == hitColliders[i].name.Substring (0, nameLength - 1))//check for obstacle
+						{
+							obsHit4 = true;
+							Merge = true;
+						}
+						else if(hitColliders[i].transform.tag == parent.transform.tag)
+							obsHit4 = true;
+					}
+					else if(hitColliders[i].transform.tag == parent.transform.tag)
+						obsHit4 = true;
+					if(hitColliders[i].transform.tag == Obstacles[j])//check for obstacle
+					{
+						obsHit4 = true;
+					}
+					if(obsHit4)
+						break;
+				}
+				if(obsHit4)
+					break;
+			}
+			if(Merge)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj3, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, -y);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit4 = false;
+				Merge = false;
+			}
+			else if(obsHit4)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, -y);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit4 = false;
+			}
+			else
+			{
+				GameObject go = Instantiate (obj, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, -y);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+			}
+		}
+	}
+
+	public void GenerateT (string name,GameObject obj,GameObject obj2, Vector3 origin, int width, int height, string[] Obstacles, Transform parent = null, bool once = false, GameObject obj3 = null,int nameLength = 3)//t shape
+	{
+		int objCount = 0;
+		Vector3 position1 = origin + new Vector3 (0, 0, 0);
+		GameObject go1 = Instantiate (obj, position1, Quaternion.identity) as GameObject;
+		go1.name = name + "_T" + objCount;
+		objCount++;
+		//go1.tag = name;
+		GridModel model1 = go1.GetComponent<GridModel> ();
+		model1.coord = new Coord (0, 0);
+		tiles.Add (go1);
+		go1.transform.SetParent(parent);
+		bool obsHit1 = false;//init obstacle hit 1
+		bool Merge = false;
 		for (int x = 1; x < width; x++) {
 			Vector3 position = origin + new Vector3 (x, 0, 0);
 			Collider[] hitColliders = Physics.OverlapSphere (position, 0);//get object in this location
@@ -372,16 +620,43 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 			{
 				for(int j = 0; j < Obstacles.Length; j++)
 				{
+					if(obj3 != null)
+					{
+						if(parent.name.Substring (0, nameLength - 1) == hitColliders[i].name.Substring (0, nameLength - 1))//check for obstacle
+						{
+							obsHit1 = true;
+							Merge = true;
+						}
+						else if(hitColliders[i].transform.tag == parent.transform.tag)
+							obsHit1 = true;
+					}
+					else if(hitColliders[i].transform.tag == parent.transform.tag)
+						obsHit1 = true;
 					if(hitColliders[i].transform.tag == Obstacles[j])//check for obstacle
 					{
 						obsHit1 = true;
-						break;//return true and end loop
 					}
+					if(obsHit1)
+						break;
 				}
 				if(obsHit1)
 					break;
 			}
-			if(obsHit1)//end loop if hit obstacle
+			if(Merge)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj3, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (x, 0);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit1 = false;
+				Merge = false;
+			}
+			else if(obsHit1)//end loop if hit obstacle
 			{
 				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
 				go.name = name + "_T" + objCount;
@@ -415,16 +690,43 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 			{
 				for(int j = 0; j < Obstacles.Length; j++)
 				{
+					if(obj3 != null)
+					{
+						if(parent.name.Substring (0, nameLength - 1) == hitColliders[i].name.Substring (0, nameLength - 1))//check for obstacle
+						{
+							obsHit2 = true;
+							Merge = true;
+						}
+						else if(hitColliders[i].transform.tag == parent.transform.tag)
+							obsHit2 = true;
+					}
+					else if(hitColliders[i].transform.tag == parent.transform.tag)
+						obsHit2 = true;
 					if(hitColliders[i].transform.tag == Obstacles[j])//check for obstacle
 					{
 						obsHit2 = true;
-						break;//return true and end loop
 					}
+					if(obsHit2)
+						break;
 				}
 				if(obsHit2)
 					break;
 			}
-			if(obsHit2)//end loop if hit obstacle
+			if(Merge)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj3, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (-x, 0);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit2 = false;
+				Merge = false;
+			}
+			else if(obsHit2)//end loop if hit obstacle
 			{
 				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
 				go.name = name + "_T" + objCount;
@@ -458,16 +760,43 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 			{
 				for(int j = 0; j < Obstacles.Length; j++)
 				{
+					if(obj3 != null)
+					{
+						if(parent.name.Substring (0, nameLength - 1) == hitColliders[i].name.Substring (0, nameLength - 1))//check for obstacle
+						{
+							obsHit3 = true;
+							Merge = true;
+						}
+						else if(hitColliders[i].transform.tag == parent.transform.tag)
+							obsHit3 = true;
+					}
+					else if(hitColliders[i].transform.tag == parent.transform.tag)
+						obsHit3 = true;
 					if(hitColliders[i].transform.tag == Obstacles[j])//check for obstacle
 					{
 						obsHit3 = true;
-						break;//return true and end loop
 					}
+					if(obsHit3)
+						break;
 				}
 				if(obsHit3)
 					break;
 			}
-			if(obsHit3)//end loop if hit obstacle
+			if(Merge)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj3, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, y);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit3 = false;
+				Merge = false;
+			}
+			else if(obsHit3)//end loop if hit obstacle
 			{
 				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
 				go.name = name + "_T" + objCount;
@@ -501,16 +830,43 @@ public class GridGenerator : MonoSingleton<GridGenerator>
 			{
 				for(int j = 0; j < Obstacles.Length; j++)
 				{
+					if(obj3 != null)
+					{
+						if(parent.name.Substring (0, nameLength - 1) == hitColliders[i].name.Substring (0, nameLength - 1))//check for obstacle
+						{
+							obsHit4 = true;
+							Merge = true;
+						}
+						else if(hitColliders[i].transform.tag == parent.transform.tag)
+							obsHit4 = true;
+					}
+					else if(hitColliders[i].transform.tag == parent.transform.tag)
+						obsHit4 = true;
 					if(hitColliders[i].transform.tag == Obstacles[j])//check for obstacle
 					{
 						obsHit4 = true;
-						break;//return true and end loop
 					}
+					if(obsHit4)
+						break;
 				}
 				if(obsHit4)
 					break;
 			}
-			if(obsHit4)//end loop if hit obstacle
+			if(Merge)//end loop if hit obstacle
+			{
+				GameObject go = Instantiate (obj3, position, Quaternion.identity) as GameObject;
+				go.name = name + "_T" + objCount;
+				objCount++;
+				//go.tag = name;
+				GridModel model = go.GetComponent<GridModel> ();
+				model.coord = new Coord (0, -y);
+				tiles.Add (go);
+				go.transform.SetParent(parent);
+				if(once)
+					obsHit4 = false;
+				Merge = false;
+			}
+			else if(obsHit4)//end loop if hit obstacle
 			{
 				GameObject go = Instantiate (obj2, position, Quaternion.identity) as GameObject;
 				go.name = name + "_T" + objCount;
