@@ -4,7 +4,7 @@ using System.Collections;
 public class TranslateMonster : MonoBehaviour {
 	[HideInInspector]public bool TMonster = false;
 	public Vector3 NextPos;
-	public bool hasAnimation = true;
+	public bool hasAnimation = false;
 	public bool hasAudio = false;
 	public string walkName = "walk-cicle";
 	public string idleName = "idle";
@@ -24,6 +24,8 @@ public class TranslateMonster : MonoBehaviour {
 		camera = GameObject.Find ("Camera");
 		ccamera = camera.GetComponent <CameraControl> ();
 		anim = GetComponent<Animation>();
+		if (anim == null)
+			hasAnimation = false;
 	}
 	
 	[RPC]
@@ -45,7 +47,8 @@ public class TranslateMonster : MonoBehaviour {
 		}
 		else
 		{
-			this.GetComponent<MonsterGrid> ().turnOver = true;
+			if (GetComponent<MonsterGrid> () != null)
+				this.GetComponent<MonsterGrid> ().turnOver = true;
 			GameStart.disableCameraControl = true;
 		}
 	}
@@ -59,6 +62,7 @@ public class TranslateMonster : MonoBehaviour {
 		translateY = tY;
 		if(hasAnimation)
 			anim.Play (walkName);
+		if (GetComponent<MMonsterGrid> () != null)
 		this.GetComponent<MMonsterGrid> ().turnOver = true;
 		GameMultiplayer.disableCameraControl = true;
 	}

@@ -28,6 +28,8 @@ public class PlayerAttack : MonoBehaviour {
 	
 	public string animationName = "Soldier_Attack";
 	public GameObject aBattleCamera;
+
+	public GameObject Arrow;
 	//Animator anim;
 	Animation anim;
 	bool Multiplayer = false;
@@ -43,11 +45,18 @@ public class PlayerAttack : MonoBehaviour {
 		TimeTexCount = 0.5f;
 		animationOn = true;
 		anim = GetComponent<Animation>();
+		if (anim == null)
+			hasAnimation = false;
 		if(GameObject.Find("Multiplayer"))
 			Multiplayer = true;
 	}
-	
-	// Update is called once per frame
+
+	[RPC]
+	public void ShootArrow (Vector3 targetPos,GameObject Target) {
+		GameObject ShotArrow = Instantiate (Arrow, transform.position, Quaternion.identity) as GameObject;
+		ShotArrow.GetComponent<Arrow> ().SetTarget (Target);
+	}
+
 	void Update () {
 
 

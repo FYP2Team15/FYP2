@@ -96,6 +96,7 @@ public class CheckGrid : MonoBehaviour {
 								int j = 0;
 								bool onTile = false;
 								while (j < tiles.Length) {
+
 									if (tiles [j].transform.tag == "PlayerTile") {
 										onTile = true;
 										break;
@@ -120,6 +121,37 @@ public class CheckGrid : MonoBehaviour {
 					}
 				}
 			}
+			else
+			{
+				go = GameObject.FindGameObjectWithTag ("ArcherTile");//Get a tile that belongs to player
+				GameObject[] Monster2 = GameObject.FindGameObjectsWithTag ("Player");
+				foreach (GameObject go2 in Monster2) {
+					MonsterGrid MonsterScript2 = go2.GetComponent<MonsterGrid> ();
+					if (MonsterScript2.GridCheck (go.name)) {
+						Collider[] tiles = Physics.OverlapSphere (this.transform.position, 0.1f);
+						int j = 0;
+						bool onArcherTile = false;
+						while (j < tiles.Length) {
+							if (tiles [j].transform.tag == "ArcherTile") {
+								onArcherTile = true;
+								break;
+							}
+							j++;
+						}
+						if (go2.tag == "Player" && onArcherTile && this.tag == "EnemyMonster") {
+							if (MonsterScript2.GridActive) {
+								MonsterScript2.GridDelete ();
+								MonsterScript2.GridActive = false;
+							}
+							
+							GameStart.disableGrid = true;
+							go2.GetComponent<MonsterGrid> ().throwOver = true;
+							go2.GetComponent<PlayerAttack> ().ShootArrow (this.transform.position,this.gameObject);
+							//go2.GetComponent<Stats>().Attack(this.gameObject);
+						}
+					}
+				}
+			}
 		}
 	}
 	protected List<GameObject> insideMe = new List<GameObject>();
@@ -132,10 +164,10 @@ public class CheckGrid : MonoBehaviour {
 						while (i < hitColliders.Length) {
 								if (hitColliders [i].transform.tag == "Player" && this.tag == "Player" && setToCombine) {
 										if (hitColliders [i].GetComponent<CheckGrid> ().setToCombineAndDestroy) {
-												if(hitColliders [i].GetComponent<Stats> () != null)
+												if(hitColliders [i].GetComponent<PlayerHealth> () != null)
 												{
-													Stats cg = hitColliders [i].GetComponent<Stats> ();
-													this.GetComponent<Stats> ().charCount += cg.charCount;//Add one count to this gameobject
+													PlayerHealth cg = hitColliders [i].GetComponent<PlayerHealth> ();
+													this.GetComponent<PlayerHealth> ().charCount += cg.charCount;//Add one count to this gameobject
 												}
 												this.GetComponent<MonsterGrid> ().GridActive = false;
 												GameStart.disableGrid = false;

@@ -1,17 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerHealth.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Arrow.cs">
     <Files>
-      <File FileName="Assets\Scripts\MonsterGrid.cs" Line="175" Column="42" />
-      <File FileName="Assets\Scripts\GameStart.cs" Line="159" Column="118" />
-      <File FileName="Assets\Scripts\Preview.cs" Line="52" Column="40" />
-      <File FileName="Assets\Scripts\EnemyMovement.cs" Line="102" Column="13" />
-      <File FileName="Assets\Scripts\ThrowObject.cs" Line="81" Column="22" />
-      <File FileName="Assets\Scripts\TranslateMonster.cs" Line="128" Column="20" />
-      <File FileName="Assets\Scripts\CheckGrid.cs" Line="76" Column="125" />
-      <File FileName="Assets\Scripts\MCheckGrid.cs" Line="68" Column="120" />
-      <File FileName="Assets\Scripts\EnemyHealth.cs" Line="110" Column="58" />
-      <File FileName="Assets\Scripts\PlayerHealth.cs" Line="116" Column="78" />
+      <File FileName="Assets\Scripts\TranslateMonster.cs" Line="32" Column="2" />
+      <File FileName="Assets\Scripts\Arrow.cs" Line="32" Column="25" />
+      <File FileName="Assets\Scripts\PlayerAttack.cs" Line="57" Column="39" />
+      <File FileName="Assets\Scripts\CheckGrid.cs" Line="149" Column="46" />
+      <File FileName="Assets\Scripts\CameraEnemy.cs" Line="72" Column="1" />
+      <File FileName="Assets\Scripts\CameraPoint.cs" Line="81" Column="1" />
+      <File FileName="Assets\Scripts\MonsterGrid.cs" Line="168" Column="54" />
+      <File FileName="Assets\Scripts\GameStart.cs" Line="301" Column="36" />
+      <File FileName="Assets\Scripts\TileModel.cs" Line="81" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
