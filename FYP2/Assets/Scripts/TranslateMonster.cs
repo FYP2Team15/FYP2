@@ -38,10 +38,10 @@ public class TranslateMonster : MonoBehaviour {
 			WalkAnim.SetActive (true);
 			IdleAnim.SetActive (false);
 		}
-		if (!hasAnimation) {
+		/*if (!hasAnimation) {
 			WalkAnim.SetActive(false);
 			IdleAnim.SetActive(true);
-		}
+		}*/
 
 		if(hasAudio)
 			audio.GetComponent<AudioScript>().playOnceCustom(translateSound);

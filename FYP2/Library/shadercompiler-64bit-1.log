@@ -1,3 +1,37 @@
-Base path: C:/Program Files/Unity5/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-5092
+Base path: C:/Program Files/Unity/Editor/Data
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-12380
 Cmd: getPlatforms
+Cmd: preprocess
+  insize=993 outsize=1275 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=7446 outsize=3508 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=7446 outsize=10154 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=4255 outsize=2753 kw=POINT SHADOWS_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=4255 outsize=6149 kw=POINT SHADOWS_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=6564 outsize=3508 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF HDR_LIGHT_PREPASS_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=6564 outsize=7416 kw=LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF HDR_LIGHT_PREPASS_OFF ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=3508 outsize=2484 kw= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3508 outsize=1314 kw= ok=1
+Cmd: compileCompute
+  api=4 insize=407 outsize=433 ok=1
+Cmd: compileCompute
+  api=4 insize=407 outsize=433 ok=1
+Cmd: compileCompute
+  api=15 insize=407 outsize=973 ok=1
+Cmd: compileCompute
+  api=9 insize=407 outsize=953 ok=1
+Cmd: preprocess
+  insize=993 outsize=1275 ok=1
+Cmd: preprocess
+  insize=993 outsize=22164 ok=1
+Cmd: preprocess
+  insize=993 outsize=1275 ok=1
+Cmd: preprocess
+  insize=993 outsize=1275 ok=1

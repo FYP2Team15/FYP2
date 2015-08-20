@@ -1,13 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EnemyAttack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CheckGrid.cs">
     <Files>
-      <File FileName="Assets\Scripts\EnemyHealth.cs" Line="147" Column="1" />
-      <File FileName="Assets\Scripts\EnemyAttack.cs" Line="42" Column="5" />
-      <File FileName="Assets\Scripts\PlayerAttack.cs" Line="81" Column="5" />
-      <File FileName="Assets\Scripts\TranslateMonster.cs" Line="187" Column="2" />
-      <File FileName="Assets\Scripts\CheckGrid.cs" Line="216" Column="1" />
-      <File FileName="Assets\Scripts\PlayerHealth.cs" Line="24" Column="18" />
+      <File FileName="Assets\Scripts\CheckGrid.cs" Line="184" Column="73" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
