@@ -11,10 +11,11 @@ public class PauseButton_InGame : MonoBehaviour {
 	public GameObject SF;
 	public string SceneQ;
 	string Sc;
+	bool StartQuit;
 
 	// Use this for initialization
 	void Start () {
-		PauseMenu.SetActive (false);
+		//PauseMenu.SetActive (false);
 		OnPaused = false;
 		//PausedIn = false;
 		}
@@ -24,22 +25,22 @@ public class PauseButton_InGame : MonoBehaviour {
 		float fadeTime = SF.GetComponent<Fade_Screen> ().BeginFade (1);
 		yield return new WaitForSeconds(fadeTime);
 //		yield return new WaitForSeconds(1);
-		Debug.Log("Seconds IN");
+		//Debug.Log("Seconds IN");
 		Application.LoadLevel(Sc);
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		//PauseMenu.SetActive (OnPaused);
 		//if (OnPaused == true) {
 		//	PausedIn = true;
-		//}
+		//}		
 	}
 
 	public void OnPause(){
-		OnPaused = true;
-		PauseMenu.SetActive (true);
+		OnPaused = !OnPaused;
+		PauseMenu.SetActive (OnPaused);
 	}
 
 	public void OffPause(){
@@ -49,6 +50,7 @@ public class PauseButton_InGame : MonoBehaviour {
 
 	public void QuitPage(){
 		Sc = "MainPage";
+		OffPause();
 		StartCoroutine (ChangeLevel (Sc));
 	}
 

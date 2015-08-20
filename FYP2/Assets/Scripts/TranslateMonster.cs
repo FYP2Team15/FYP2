@@ -6,13 +6,14 @@ public class TranslateMonster : MonoBehaviour {
 	public Vector3 NextPos;
 	public bool hasAnimation = false;
 	public bool hasAudio = false;
-	public string walkName = "walk-cicle";
-	public string idleName = "idle";
+	//public string walkName = "walk-cicle";
+	//public string idleName = "idle";
 	public Vector3 MoveSpeed = new Vector3(0.05f,0.02f,0.05f);
 	public bool translateY = true;
 	GameObject camera;
 	CameraControl ccamera;
-	Animation anim;
+	public GameObject WalkAnim;
+	public GameObject IdleAnim;
 	GameObject audio = new GameObject();
 	[HideInInspector]public bool notActuallyOver = false;
 	public AudioClip translateSound;
@@ -23,8 +24,7 @@ public class TranslateMonster : MonoBehaviour {
 			hasAudio = false;
 		camera = GameObject.Find ("Camera");
 		ccamera = camera.GetComponent <CameraControl> ();
-		anim = GetComponent<Animation>();
-		if (anim == null)
+		if (WalkAnim == null || IdleAnim == null)
 			hasAnimation = false;
 	}
 	
@@ -34,8 +34,10 @@ public class TranslateMonster : MonoBehaviour {
 		TMonster = T;
 		NextPos = Pos;
 		translateY = tY;
-		if(hasAnimation)
-			anim.Play (walkName);
+		if (hasAnimation) {
+			WalkAnim.SetActive (true);
+			IdleAnim.SetActive (false);
+		}
 		if(hasAudio)
 			audio.GetComponent<AudioScript>().playOnceCustom(translateSound);
 		GameObject multi = GameObject.Find ("Multiplayer");
@@ -60,8 +62,10 @@ public class TranslateMonster : MonoBehaviour {
 		TMonster = T;
 		NextPos = Pos;
 		translateY = tY;
-		if(hasAnimation)
-			anim.Play (walkName);
+		if (hasAnimation) {
+			WalkAnim.SetActive (true);
+			IdleAnim.SetActive (false);
+		}
 		if (GetComponent<MMonsterGrid> () != null)
 		this.GetComponent<MMonsterGrid> ().turnOver = true;
 		GameMultiplayer.disableCameraControl = true;
@@ -122,8 +126,10 @@ public class TranslateMonster : MonoBehaviour {
 		GameMultiplayer.disableCameraControl = false;
 		//if(this.tag == "Player")
 		GameMultiplayer.movesleft--;
-		if(hasAnimation)
-			anim.Play (idleName);
+		if (hasAnimation) {
+			WalkAnim.SetActive (false);
+			IdleAnim.SetActive (true);
+		}
 	}
 	public void nextTurn()
 	{
@@ -139,9 +145,10 @@ public class TranslateMonster : MonoBehaviour {
 			this.GetComponent<MonsterGrid> ().turnOver = false;
 			notActuallyOver = false;
 		}
-		if(hasAnimation)
-			anim.Play (idleName);
-			//anim.Play("idle");
+		if (hasAnimation) {
+			WalkAnim.SetActive (false);
+			IdleAnim.SetActive (true);
+		}
 		if(hasAudio)
 			audio.GetComponent<AudioSource>().Stop();
 	}
@@ -153,9 +160,10 @@ public class TranslateMonster : MonoBehaviour {
 		GameStart.disableGrid = false;
 		GameStart.disableCameraControl = false;
 		//GameStart.movesleft--;
-		if (hasAnimation)
-			anim.Play (idleName);
-			//anim.Play ("idle");
+		if (hasAnimation) {
+			WalkAnim.SetActive (false);
+			IdleAnim.SetActive (true);
+		}
 		if(hasAudio)
 			audio.GetComponent<AudioSource>().Stop();
 	}
@@ -166,7 +174,9 @@ public class TranslateMonster : MonoBehaviour {
 		ccamera.target = null;//stop camera panning
 		GameMultiplayer.disableGrid = false;
 		GameMultiplayer.disableCameraControl = false;
-		if(hasAnimation)
-			anim.Play (idleName);
+		if (hasAnimation) {
+			WalkAnim.SetActive (false);
+			IdleAnim.SetActive (true);
+		}
 	}
 }

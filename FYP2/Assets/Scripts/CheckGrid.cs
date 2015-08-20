@@ -124,30 +124,33 @@ public class CheckGrid : MonoBehaviour {
 			else
 			{
 				go = GameObject.FindGameObjectWithTag ("ArcherTile");//Get a tile that belongs to player
-				GameObject[] Monster2 = GameObject.FindGameObjectsWithTag ("Player");
-				foreach (GameObject go2 in Monster2) {
-					MonsterGrid MonsterScript2 = go2.GetComponent<MonsterGrid> ();
-					if (MonsterScript2.GridCheck (go.name)) {
-						Collider[] tiles = Physics.OverlapSphere (this.transform.position, 0.1f);
-						int j = 0;
-						bool onArcherTile = false;
-						while (j < tiles.Length) {
-							if (tiles [j].transform.tag == "ArcherTile") {
-								onArcherTile = true;
-								break;
+				if (go != null)
+				{
+					GameObject[] Monster2 = GameObject.FindGameObjectsWithTag ("Player");
+					foreach (GameObject go2 in Monster2) {
+						MonsterGrid MonsterScript2 = go2.GetComponent<MonsterGrid> ();
+						if (MonsterScript2.GridCheck (go.name)) {
+							Collider[] tiles = Physics.OverlapSphere (this.transform.position, 0.1f);
+							int j = 0;
+							bool onArcherTile = false;
+							while (j < tiles.Length) {
+								if (tiles [j].transform.tag == "ArcherTile") {
+									onArcherTile = true;
+									break;
+								}
+								j++;
 							}
-							j++;
-						}
-						if (go2.tag == "Player" && onArcherTile && this.tag == "EnemyMonster") {
-							if (MonsterScript2.GridActive) {
-								MonsterScript2.GridDelete ();
-								MonsterScript2.GridActive = false;
-							}
+							if (go2.tag == "Player" && onArcherTile && this.tag == "EnemyMonster") {
+								if (MonsterScript2.GridActive) {
+									MonsterScript2.GridDelete ();
+									MonsterScript2.GridActive = false;
+								}
 							
-							GameStart.disableGrid = true;
-							go2.GetComponent<MonsterGrid> ().throwOver = true;
-							go2.GetComponent<PlayerAttack> ().ShootArrow (this.transform.position,this.gameObject);
-							//go2.GetComponent<Stats>().Attack(this.gameObject);
+								GameStart.disableGrid = true;
+								go2.GetComponent<MonsterGrid> ().throwOver = true;
+								go2.GetComponent<PlayerAttack> ().ShootArrow (this.transform.position,this.gameObject);
+								//go2.GetComponent<Stats>().Attack(this.gameObject);
+							}
 						}
 					}
 				}
