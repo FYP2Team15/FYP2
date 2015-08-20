@@ -5,6 +5,8 @@ public class EnemyAttack : MonoBehaviour {
 
 	public float AttackTimer = 1.0f;
 	float attackdmg = 0;
+	public float EneDMG = 0;
+	public float EDMG = 0;
 	public float minDmg = 5;
 	public float maxDmg = 10;
 	public float coolDown = 3.0f;

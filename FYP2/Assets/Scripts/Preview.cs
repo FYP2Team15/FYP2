@@ -5,7 +5,7 @@ public class Preview : MonoBehaviour {
 
 	public GameObject tile;
 	public GameObject tile2;
-	public int range = 5;
+	public int range = 5;		//player movement range
 	[HideInInspector]public bool GridActive = false;
 	// Use this for initialization
 	void Start () {

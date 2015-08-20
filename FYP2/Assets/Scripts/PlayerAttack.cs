@@ -6,6 +6,7 @@ public class PlayerAttack : MonoBehaviour {
 	public GUITexture texture;
 	public float PlayerAttDmg;
 //	public GameObject target;
+	public float PlayDMG = 0;
 	public float DMG = 10;
 	public float minDmg = 5;
 	public float maxDmg = 10;

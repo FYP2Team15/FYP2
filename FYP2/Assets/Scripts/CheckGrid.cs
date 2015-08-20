@@ -4,9 +4,14 @@ using System.Collections.Generic;
 
 public class CheckGrid : MonoBehaviour {
 	PlayerAttack PA;
+	PlayerHealth PH;
+	EnemyAttack EA;
+	EnemyHealth EH;
 	bool PlayerT = false;
 	public bool PlayPause;
-	public int nameLength = 3;
+	public int nameLength = 3;		
+	public int NumMonster = 0;			// number of monsters joined into one
+	public int PlayStats = 0;
 	[HideInInspector]public bool setToCombine = false;//set to combine flag
 	[HideInInspector]public bool setToCombineAndDestroy = false;//set to combine and destroyed flag
 	// Use this for initialization
@@ -74,6 +79,7 @@ public class CheckGrid : MonoBehaviour {
 								this.GetComponent<CarScript>().EnterWhenReached(go2);
 							}
 							else if (go2.tag == this.tag && MergeTile && this.name.Substring (0, nameLength) == go2.name.Substring (0, nameLength)) {
+								NumMonster += 1;
 								if (MonsterScript2.GridActive) {//Closes grid after checking
 									MonsterScript2.GridDelete ();
 									MonsterScript2.GridActive = false;
@@ -81,6 +87,8 @@ public class CheckGrid : MonoBehaviour {
 								go2.GetComponent<TranslateMonster> ().Translate (true, this.transform.position);//translate go2 to this
 								go2.GetComponent<CheckGrid> ().setToCombineAndDestroy = true;//mark them as combined target
 								setToCombine = true;
+								PA.PlayDMG = NumMonster * PA.DMG;
+
 								break;
 								//Vector3 go2newPos = this.transform.pocombsition;
 								//go2.transform.position = go2newPos;
@@ -158,7 +166,11 @@ public class CheckGrid : MonoBehaviour {
 		}
 	}
 	protected List<GameObject> insideMe = new List<GameObject>();
-	
+
+	void CheckPlayerStats(){		//Check player stats when merging between two
+
+	}
+
 	// Update is called once per frame
 	void Update () {
 		Collider[] hitColliders = Physics.OverlapSphere (this.transform.position, 1.0f);//get gameobjects right beside this object
@@ -184,12 +196,16 @@ public class CheckGrid : MonoBehaviour {
 								}
 
 								if (hitColliders [i].transform.tag == "EnemyMonster" && this.tag == "Player" 
-				    && !hitColliders [i].GetComponent<EnemyAttack> ().attacking && !GetComponent<PlayerAttack> ().attacking) {//if this is player and collided to enemy
+				    && !hitColliders [i].GetComponent<EnemyAttack> ().attacking && !GetComponent<PlayerAttack> ().attacking && PH.CurArmor == EH.CurArmor /*&& PA.PlayDMG == EA.EneDMG*/) {//if this is player and collided to enemy
 										hitColliders [i].GetComponent<EnemyAttack> ().StartEnAttack (this.gameObject);//attack enemy
 
 										GetComponent<PlayerAttack> ().StartAttack (hitColliders [i].gameObject);//attack player
 										Debug.Log ("Got minus");	
 										//this.GetComponent<TranslateMonster> ().nextTurn();
+								}else if (hitColliders [i].transform.tag == "EnemyMonster" && this.tag == "Player" 
+				         		 && !hitColliders [i].GetComponent<EnemyAttack> ().attacking && !GetComponent<PlayerAttack> ().attacking && PA.PlayDMG > EA.EneDMG) {		// if player and collided to enemy but player hp more than enemy
+									EH.CurArmor = 0;
+									
 								}
 								i++;
 						}

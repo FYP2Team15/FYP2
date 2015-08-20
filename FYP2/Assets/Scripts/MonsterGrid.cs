@@ -14,8 +14,8 @@ public class MonsterGrid : MonoBehaviour
 	public string[] SpecialException;
 	private string[] SpecialObstacles;
 	public bool hasSTile = true;
-	public int range = 5;
-	public int type = 1;//0 = t shape, 1 = square shape
+	public int range = 5;	//Player movement range
+	public int type = 1;//0 = t shape (Cross Shape), 1 = square shape( X Shape)
 	public Vector3 Offset = new Vector3(0,0,0);
 	[HideInInspector]public bool GridActive = false;
 	[HideInInspector]public bool turnOver = false;

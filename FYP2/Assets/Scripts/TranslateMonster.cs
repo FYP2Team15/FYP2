@@ -38,6 +38,11 @@ public class TranslateMonster : MonoBehaviour {
 			WalkAnim.SetActive (true);
 			IdleAnim.SetActive (false);
 		}
+		if (!hasAnimation) {
+			WalkAnim.SetActive(false);
+			IdleAnim.SetActive(true);
+		}
+
 		if(hasAudio)
 			audio.GetComponent<AudioScript>().playOnceCustom(translateSound);
 		GameObject multi = GameObject.Find ("Multiplayer");
