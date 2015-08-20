@@ -18,11 +18,16 @@ public class EnemyAttack : MonoBehaviour {
 	public float timer;
 	bool Multiplayer = false;
 
+	public GameObject FightAnim;
+	public GameObject IdleAnim;
+	public bool hasAnimation = true;
 
 	// Use this for initialization
 	void Start () {
 		//AttackTimer = 0.0f;
 		//coolDown = 2.0f;
+		if (FightAnim == null || IdleAnim == null)
+			hasAnimation = false;
 		if(GameObject.Find("Multiplayer"))
 			Multiplayer = true;
 	}
@@ -31,9 +36,15 @@ public class EnemyAttack : MonoBehaviour {
 	// Update is called once per frame
 	public void Update () {
 
+		if (attackTarget == null) {
 
-		if(attackTarget == null)
+			if (hasAnimation && attacking) {
+				FightAnim.SetActive (false);
+				IdleAnim.SetActive (true);
+			}
 			attacking = false;
+		}
+
 		if(attacking)
 		{
 			attackdmg = Random.Range (minDmg, maxDmg);
@@ -73,6 +84,11 @@ public class EnemyAttack : MonoBehaviour {
 		attackTarget = target;
 		AI = singleplayer;
 		GetComponent<TranslateMonster> ().Stop ();
+
+		if (hasAnimation) {
+			FightAnim.SetActive (true);
+			IdleAnim.SetActive (false);
+		}
 
 		if(GameObject.Find("Camera").GetComponent<Camera>().enabled)
 		{

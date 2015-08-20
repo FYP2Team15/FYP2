@@ -25,7 +25,8 @@ public class PlayerAttack : MonoBehaviour {
 	bool TimeReached;
 	float TimeTexCount;		// count down to texture show
 	public bool animationOn;
-
+	public GameObject FightAnim;
+	public GameObject IdleAnim;
 	
 	public string animationName = "Soldier_Attack";
 	public GameObject aBattleCamera;
@@ -46,7 +47,7 @@ public class PlayerAttack : MonoBehaviour {
 		TimeTexCount = 0.5f;
 		animationOn = true;
 		anim = GetComponent<Animation>();
-		if (anim == null)
+		if (FightAnim == null || IdleAnim == null)
 			hasAnimation = false;
 		if(GameObject.Find("Multiplayer"))
 			Multiplayer = true;
@@ -77,6 +78,10 @@ public class PlayerAttack : MonoBehaviour {
 					Attack();
 				else if(Network.isServer)
 					Attack();
+				if (hasAnimation) {
+					FightAnim.SetActive (false);
+					IdleAnim.SetActive (true);
+				}
 			}
 			else
 				attacking = false;
@@ -135,6 +140,12 @@ public class PlayerAttack : MonoBehaviour {
 		attacking = true;
 		attackTarget = target;
 
+		if (hasAnimation) {
+			FightAnim.SetActive (true);
+			IdleAnim.SetActive (false);
+
+		}
+
 		if(GameObject.Find("Camera").GetComponent<Camera>().enabled)
 		{
 			Debug.Log ("asd");
@@ -177,7 +188,7 @@ public class PlayerAttack : MonoBehaviour {
 			//	ChangeHP(t);
 			//}//here ends for input A
 			#endif	
-			hasAnimation = false;
+			//hasAnimation = false;
 		} else {}
 	}
 	void ChangeHP(EnemyHealth t){
@@ -224,7 +235,7 @@ public class PlayerAttack : MonoBehaviour {
 		TimeTexCount = 0.5f;
 	}*/
 
-		hasAnimation = true;
+		//hasAnimation = true;
 		PlayerAttacked = true;
 		ActivateButton = false;
 		texture.GetComponent<GUITexture> ().color = Color.white;
